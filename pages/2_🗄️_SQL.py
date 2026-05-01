@@ -5,43 +5,64 @@ st.set_page_config(page_title="SQL", page_icon="🗄️", layout="wide")
 st.title("🗄️ SQL")
 st.subheader("Consultas, bases de datos y análisis empresarial")
 
+# -----------------------------------------
+# 1. ¿QUÉ ES?
+# -----------------------------------------
+st.markdown("## 📚 ¿Qué es SQL?")
+
 st.markdown("""
-## ¿Qué es SQL?
+SQL es el lenguaje que permite consultar, insertar y analizar datos en bases de datos.
 
-SQL es el lenguaje usado para consultar, insertar, actualizar y analizar información guardada en bases de datos.
-
-## ¿Para qué me sirve?
-
-Me sirve para:
-
-- Consultar datos reales de una empresa
-- Validar información antes de llevarla a Power BI
-- Crear reportes
-- Revisar errores en inventarios, ventas o movimientos
-- Conectar datos con Python o Power BI
+Se usa en empresas para trabajar con información real.
 """)
 
-st.divider()
+# -----------------------------------------
+# 2. ¿PARA QUÉ SIRVE?
+# -----------------------------------------
+st.markdown("## 🎯 ¿Para qué sirve?")
 
-st.markdown("## Primera práctica: SELECT básico")
+st.markdown("""
+- Consultar datos reales
+- Validar información
+- Crear reportes
+- Preparar datos para Power BI
+""")
+
+# -----------------------------------------
+# 3. ¿DÓNDE LO USÉ?
+# -----------------------------------------
+st.markdown("## 🏢 ¿Dónde lo usé?")
+
+st.info("""
+En proyectos de inventario, ventas y validación de datos antes de visualizarlos en Power BI.
+""")
+
+# -----------------------------------------
+# 4. CÓDIGO
+# -----------------------------------------
+st.markdown("## 💻 Código básico")
 
 st.code("""
 SELECT *
 FROM ventas;
 """, language="sql")
 
-st.markdown("""
-### ¿Qué hace?
+# -----------------------------------------
+# 5. PRÁCTICA
+# -----------------------------------------
+st.markdown("## 🧪 Práctica")
 
-Trae todos los registros de la tabla `ventas`.
-
-### ¿Cuándo lo uso?
-
-Cuando quiero revisar rápidamente qué información tiene una tabla.
+st.success("""
+Crea una tabla llamada productos y consulta todos sus registros.
 """)
 
-st.markdown("## Práctica para ti")
+# -----------------------------------------
+# 6. ERRORES
+# -----------------------------------------
+st.markdown("## ⚠️ Errores comunes")
 
-st.info("""
-Crea una tabla llamada productos y consulta todos sus registros usando SELECT.
+st.warning("""
+- No usar WHERE correctamente
+- Olvidar JOIN entre tablas
+- No validar datos antes de analizarlos
 """)
