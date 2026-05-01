@@ -9,31 +9,79 @@ st.set_page_config(
 st.markdown("""
 <style>
 .card {
-    height: 125px;
-    padding: 18px;
-    border-radius: 10px;
-    margin-bottom: 14px;
+    height: auto !important;
+    min-height: 180px !important;
+    padding: 22px 18px 32px 18px !important;
+    border-radius: 12px;
+    margin-bottom: 18px !important;
     font-size: 15px;
+    line-height: 1.8 !important;
     box-sizing: border-box;
+    overflow: visible !important;
+    word-break: normal;
+    white-space: normal;
 }
+
 .card h4 {
-    margin-top: 0;
-    margin-bottom: 14px;
+    margin-top: 0 !important;
+    margin-bottom: 18px !important;
+    font-size: 20px;
+    line-height: 1.4 !important;
+}
+
+.card p {
+    margin: 0 !important;
+    padding-bottom: 12px !important;
+    line-height: 1.8 !important;
+    overflow: visible !important;
+    white-space: normal;
+}
+@media (max-width: 768px) {
+    .card {
+        height: auto !important;
+        min-height: 220px !important;
+        padding-bottom: 40px !important;
+        overflow: visible !important;
+    }
+
+    .card p {
+        font-size: 14px !important;
+        line-height: 1.9 !important;
+        padding-bottom: 20px !important;
+    }
 }
 .card-blue {
     background-color: #e8f2ff;
     color: #004b93;
 }
+
 .card-green {
     background-color: #e6f7ec;
     color: #006b2f;
 }
+
 .card-yellow {
     background-color: #fffbe6;
     color: #8a6500;
 }
+
+/* Ajuste especial para celular */
+@media (max-width: 768px) {
+    .card {
+        padding: 18px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .card h4 {
+        font-size: 18px;
+        line-height: 1.4;
+    }
+}
 </style>
 """, unsafe_allow_html=True)
+
 
 st.title("🧠 DevData Academy")
 st.subheader("Mi tutor personal de Python, SQL, Power BI, Excel, Streamlit y NEXUS")
@@ -78,6 +126,85 @@ if busqueda:
 
     if "power bi" in busqueda.lower():
         st.success("📊 Power BI → Revisa DAX y dashboards")
+st.divider()
+
+st.markdown("## 🧪 Modo práctica")
+
+modulo_practica = st.selectbox(
+    "Selecciona qué quieres practicar",
+    ["Seleccione...", "Python", "SQL", "Power BI", "Excel", "NEXUS / Kardex", "Streamlit", "PDF", "Control ANS"]
+)
+
+nivel = st.selectbox(
+    "Selecciona el nivel",
+    ["Básico", "Intermedio", "Avanzado"]
+)
+
+if modulo_practica == "SQL":
+    st.success("🗄️ Práctica SQL - Nivel " + nivel)
+
+    st.markdown("### Objetivo")
+    st.write("Practicar consultas básicas para extraer información de una tabla.")
+
+    st.markdown("### Explicación")
+    st.write("SQL permite consultar datos almacenados en una base de datos. La consulta más básica es SELECT.")
+
+    st.markdown("### Código guía")
+    st.code("""
+SELECT *
+FROM ventas;
+""", language="sql")
+
+    st.markdown("### Reto")
+    st.info("Crea una consulta que muestre solo las columnas cliente, ciudad y total_venta de la tabla ventas.")
+
+elif modulo_practica == "Python":
+    st.success("🐍 Práctica Python - Nivel " + nivel)
+
+    st.markdown("### Objetivo")
+    st.write("Leer un archivo Excel y calcular una nueva columna.")
+
+    st.markdown("### Explicación")
+    st.write("Con pandas puedes cargar archivos, limpiar datos y crear columnas calculadas.")
+
+    st.markdown("### Código guía")
+    st.code("""
+import pandas as pd
+
+df = pd.read_excel("ventas.xlsx")
+df["total"] = df["cantidad"] * df["precio"]
+
+print(df.head())
+""", language="python")
+
+    st.markdown("### Reto")
+    st.info("Crea una columna llamada total_iva calculando el total más el 19% de IVA.")
+
+elif modulo_practica == "Power BI":
+    st.success("📊 Práctica Power BI - Nivel " + nivel)
+
+    st.markdown("### Objetivo")
+    st.write("Crear una medida DAX para calcular ventas totales.")
+
+    st.markdown("### Código guía")
+    st.code("""
+Ventas Totales = SUM(Ventas[Total])
+""", language="text")
+
+    st.markdown("### Reto")
+    st.info("Crea una medida llamada Promedio Venta usando AVERAGE.")
+
+elif modulo_practica == "NEXUS / Kardex":
+    st.success("📦 Práctica NEXUS / Kardex - Nivel " + nivel)
+
+    st.markdown("### Objetivo")
+    st.write("Recordar la regla principal del stock en NEXUS.")
+
+    st.markdown("### Regla")
+    st.warning("Solo METROPOLITANA SUR afecta el stock real. Las demás zonas son trazabilidad.")
+
+    st.markdown("### Reto")
+    st.info("Explica por qué una ENTREGA AH mal registrada debe corregirse con REINTEGRO y no con ajuste manual.")
 
 col1, col2, col3 = st.columns(3)
 
