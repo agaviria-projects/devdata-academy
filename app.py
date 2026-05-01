@@ -205,7 +205,82 @@ elif modulo_practica == "NEXUS / Kardex":
 
     st.markdown("### Reto")
     st.info("Explica por qué una ENTREGA AH mal registrada debe corregirse con REINTEGRO y no con ajuste manual.")
+elif modulo_practica == "Excel":
+    st.success("📘 Práctica Excel - Nivel " + nivel)
 
+    st.markdown("### Objetivo")
+    st.write("Practicar limpieza y organización de datos en Excel.")
+
+    st.markdown("### Explicación")
+    st.write("Excel permite estructurar información, aplicar fórmulas, limpiar datos y preparar reportes.")
+
+    st.markdown("### Ejemplo")
+    st.code("""
+=SI(A2="";"Sin dato";A2)
+""", language="text")
+
+    st.markdown("### Reto")
+    st.info("Crea una tabla con productos, cantidades y precios. Calcula el total por producto.")
+
+
+elif modulo_practica == "Streamlit":
+    st.success("🌐 Práctica Streamlit - Nivel " + nivel)
+
+    st.markdown("### Objetivo")
+    st.write("Crear una mini app con título, texto y botón.")
+
+    st.markdown("### Código guía")
+    st.code("""
+import streamlit as st
+
+st.title("Mi primera app")
+st.write("Hola, estoy aprendiendo Streamlit")
+
+if st.button("Saludar"):
+    st.success("¡Hola!")
+""", language="python")
+
+    st.markdown("### Reto")
+    st.info("Agrega un input de texto para que el usuario escriba su nombre.")
+
+
+elif modulo_practica == "PDF":
+    st.success("📄 Práctica PDF - Nivel " + nivel)
+
+    st.markdown("### Objetivo")
+    st.write("Recordar cómo automatizar la compresión de archivos PDF con Python.")
+
+    st.markdown("### Código guía")
+    st.code("""
+from pathlib import Path
+
+carpeta_origen = Path("PDF")
+carpeta_destino = Path("PDF_COMPRIMIDOS")
+
+carpeta_destino.mkdir(exist_ok=True)
+""", language="python")
+
+    st.markdown("### Reto")
+    st.info("Crea una carpeta origen y una carpeta destino para guardar PDFs comprimidos.")
+
+
+elif modulo_practica == "Control ANS":
+    st.success("⏱️ Práctica Control ANS - Nivel " + nivel)
+
+    st.markdown("### Objetivo")
+    st.write("Calcular si una solicitud cumple o incumple el tiempo acordado.")
+
+    st.markdown("### Código guía")
+    st.code("""
+if fecha_cierre <= fecha_limite:
+    estado = "Cumplido"
+else:
+    estado = "Vencido"
+""", language="python")
+
+    st.markdown("### Reto")
+    st.info("Crea una tabla con fecha_creacion, fecha_limite y fecha_cierre. Calcula el estado ANS.")
+    
 col1, col2, col3 = st.columns(3)
 
 with col1:
