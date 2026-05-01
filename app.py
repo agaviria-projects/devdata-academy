@@ -1,10 +1,97 @@
+import sqlite3
+from pathlib import Path
+
 import streamlit as st
+
+DB_PATH = Path("data/conocimiento.db")
+
+
+def conectar_db():
+    return sqlite3.connect(DB_PATH)
+
+
+def crear_tabla_si_no_existe():
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    conn = conectar_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS conocimiento (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        modulo TEXT,
+        titulo TEXT,
+        descripcion TEXT,
+        codigo TEXT,
+        fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
+
+    conn.commit()
+    conn.close()
+
+
+def guardar_conocimiento(modulo, titulo, descripcion, codigo):
+    conn = conectar_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    INSERT INTO conocimiento (modulo, titulo, descripcion, codigo)
+    VALUES (?, ?, ?, ?)
+    """, (modulo, titulo, descripcion, codigo))
+
+    conn.commit()
+    conn.close()
+
+
+def buscar_conocimiento(busqueda):
+    conn = conectar_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT modulo, titulo, descripcion, codigo, fecha
+    FROM conocimiento
+    WHERE titulo LIKE ?
+       OR descripcion LIKE ?
+       OR codigo LIKE ?
+       OR modulo LIKE ?
+    ORDER BY id DESC
+    """, (
+        f"%{busqueda}%",
+        f"%{busqueda}%",
+        f"%{busqueda}%",
+        f"%{busqueda}%"
+    ))
+
+    resultados = cursor.fetchall()
+    conn.close()
+
+    return resultados
+
+
+def obtener_conocimiento():
+    conn = conectar_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT modulo, titulo, descripcion, codigo, fecha
+    FROM conocimiento
+    ORDER BY id DESC
+    """)
+
+    datos = cursor.fetchall()
+    conn.close()
+
+    return datos
+
 
 st.set_page_config(
     page_title="DevData Academy",
     page_icon="🧠",
     layout="wide"
 )
+
+crear_tabla_si_no_existe()
 
 st.markdown("""
 <style>
@@ -36,20 +123,7 @@ st.markdown("""
     overflow: visible !important;
     white-space: normal;
 }
-@media (max-width: 768px) {
-    .card {
-        height: auto !important;
-        min-height: 220px !important;
-        padding-bottom: 40px !important;
-        overflow: visible !important;
-    }
 
-    .card p {
-        font-size: 14px !important;
-        line-height: 1.9 !important;
-        padding-bottom: 20px !important;
-    }
-}
 .card-blue {
     background-color: #e8f2ff;
     color: #004b93;
@@ -65,23 +139,30 @@ st.markdown("""
     color: #8a6500;
 }
 
-/* Ajuste especial para celular */
 @media (max-width: 768px) {
     .card {
-        padding: 18px;
-        margin-bottom: 16px;
-        font-size: 14px;
-        line-height: 1.8;
+        height: auto !important;
+        min-height: 220px !important;
+        padding: 18px 18px 40px 18px !important;
+        margin-bottom: 16px !important;
+        font-size: 14px !important;
+        line-height: 1.8 !important;
+        overflow: visible !important;
     }
 
     .card h4 {
-        font-size: 18px;
-        line-height: 1.4;
+        font-size: 18px !important;
+        line-height: 1.4 !important;
+    }
+
+    .card p {
+        font-size: 14px !important;
+        line-height: 1.9 !important;
+        padding-bottom: 20px !important;
     }
 }
 </style>
 """, unsafe_allow_html=True)
-
 
 st.title("🧠 DevData Academy")
 st.subheader("Mi tutor personal de Python, SQL, Power BI, Excel, Streamlit y NEXUS")
@@ -100,32 +181,27 @@ Aquí vas a:
 
 st.divider()
 
-st.markdown("## 🔍 ¿Qué quieres hacer hoy?")
-
 st.markdown("## 🔎 Buscar en tu conocimiento")
 
 busqueda = st.text_input("Escribe algo (ej: JOIN, pandas, reintegro...)")
 
 if busqueda:
-    st.info(f"Resultados para: {busqueda}")
+    resultados = buscar_conocimiento(busqueda)
 
-    if "sql" in busqueda.lower() or "join" in busqueda.lower():
-        st.success("🗄️ SQL → Ve a la sección SQL para practicar JOIN y consultas")
+    if resultados:
+        st.success(f"Resultados encontrados: {len(resultados)}")
 
-    if "python" in busqueda.lower() or "pandas" in busqueda.lower():
-        st.success("🐍 Python → Revisa limpieza de datos y automatización")
+        for modulo, titulo, descripcion, codigo, fecha in resultados:
+            with st.expander(f"📌 {titulo} | {modulo}"):
+                st.markdown(f"**Módulo:** {modulo}")
+                st.markdown(f"**Fecha:** {fecha}")
+                st.markdown(descripcion)
 
-    if "pdf" in busqueda.lower():
-        st.success("📄 PDF → Revisa compresión de PDFs")
+                if codigo:
+                    st.code(codigo)
+    else:
+        st.warning("No se encontraron resultados en tu base de conocimiento.")
 
-    if "ans" in busqueda.lower():
-        st.success("⏱️ Control ANS → Revisa seguimiento de tiempos")
-
-    if "nexus" in busqueda.lower() or "kardex" in busqueda.lower():
-        st.success("📦 NEXUS → Revisa reglas de negocio e inventario")
-
-    if "power bi" in busqueda.lower():
-        st.success("📊 Power BI → Revisa DAX y dashboards")
 st.divider()
 
 st.markdown("## 🧪 Modo práctica")
@@ -205,6 +281,7 @@ elif modulo_practica == "NEXUS / Kardex":
 
     st.markdown("### Reto")
     st.info("Explica por qué una ENTREGA AH mal registrada debe corregirse con REINTEGRO y no con ajuste manual.")
+
 elif modulo_practica == "Excel":
     st.success("📘 Práctica Excel - Nivel " + nivel)
 
@@ -221,7 +298,6 @@ elif modulo_practica == "Excel":
 
     st.markdown("### Reto")
     st.info("Crea una tabla con productos, cantidades y precios. Calcula el total por producto.")
-
 
 elif modulo_practica == "Streamlit":
     st.success("🌐 Práctica Streamlit - Nivel " + nivel)
@@ -243,7 +319,6 @@ if st.button("Saludar"):
     st.markdown("### Reto")
     st.info("Agrega un input de texto para que el usuario escriba su nombre.")
 
-
 elif modulo_practica == "PDF":
     st.success("📄 Práctica PDF - Nivel " + nivel)
 
@@ -263,7 +338,6 @@ carpeta_destino.mkdir(exist_ok=True)
     st.markdown("### Reto")
     st.info("Crea una carpeta origen y una carpeta destino para guardar PDFs comprimidos.")
 
-
 elif modulo_practica == "Control ANS":
     st.success("⏱️ Práctica Control ANS - Nivel " + nivel)
 
@@ -280,7 +354,11 @@ else:
 
     st.markdown("### Reto")
     st.info("Crea una tabla con fecha_creacion, fecha_limite y fecha_cierre. Calcula el estado ANS.")
-    
+
+st.divider()
+
+st.markdown("## 🔍 ¿Qué quieres hacer hoy?")
+
 col1, col2, col3 = st.columns(3)
 
 with col1:
@@ -358,3 +436,35 @@ with col9:
         <p>Casos reales, fallas corregidas y aprendizajes técnicos.</p>
     </div>
     """, unsafe_allow_html=True)
+
+st.divider()
+st.markdown("## 🧠 Guardar nuevo conocimiento")
+
+modulo = st.selectbox("Módulo", ["Python", "SQL", "Power BI", "Excel", "NEXUS", "PDF", "ANS"])
+titulo = st.text_input("Título")
+descripcion = st.text_area("Descripción")
+codigo = st.text_area("Código (opcional)")
+
+if st.button("Guardar conocimiento"):
+    if not titulo.strip() or not descripcion.strip():
+        st.error("Debes escribir al menos título y descripción.")
+    else:
+        guardar_conocimiento(modulo, titulo, descripcion, codigo)
+        st.success("Conocimiento guardado correctamente.")
+
+st.divider()
+st.markdown("## 📚 Conocimiento guardado")
+
+datos = obtener_conocimiento()
+
+if datos:
+    for modulo, titulo, descripcion, codigo, fecha in datos:
+        with st.expander(f"📌 {titulo} | {modulo}"):
+            st.markdown(f"**Módulo:** {modulo}")
+            st.markdown(f"**Fecha:** {fecha}")
+            st.markdown(descripcion)
+
+            if codigo:
+                st.code(codigo)
+else:
+    st.info("Aún no hay conocimiento guardado.")
