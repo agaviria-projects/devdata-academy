@@ -54,6 +54,31 @@ st.divider()
 
 st.markdown("## 🔍 ¿Qué quieres hacer hoy?")
 
+st.markdown("## 🔎 Buscar en tu conocimiento")
+
+busqueda = st.text_input("Escribe algo (ej: JOIN, pandas, reintegro...)")
+
+if busqueda:
+    st.info(f"Resultados para: {busqueda}")
+
+    if "sql" in busqueda.lower() or "join" in busqueda.lower():
+        st.success("🗄️ SQL → Ve a la sección SQL para practicar JOIN y consultas")
+
+    if "python" in busqueda.lower() or "pandas" in busqueda.lower():
+        st.success("🐍 Python → Revisa limpieza de datos y automatización")
+
+    if "pdf" in busqueda.lower():
+        st.success("📄 PDF → Revisa compresión de PDFs")
+
+    if "ans" in busqueda.lower():
+        st.success("⏱️ Control ANS → Revisa seguimiento de tiempos")
+
+    if "nexus" in busqueda.lower() or "kardex" in busqueda.lower():
+        st.success("📦 NEXUS → Revisa reglas de negocio e inventario")
+
+    if "power bi" in busqueda.lower():
+        st.success("📊 Power BI → Revisa DAX y dashboards")
+
 col1, col2, col3 = st.columns(3)
 
 with col1:
