@@ -232,7 +232,7 @@ st.markdown("""
     font-size: clamp(15px, 4vw, 22px);
     line-height: 1.4;
 ">
-Mi tutor personal de Python, SQL, Power BI, Excel, Streamlit y NEXUS
+Mi tutor personal de Python, SQL, Power BI, Excel, Streamlit ,Nexus,Control ANS,Comprensor inteligente PDF, Git / Git
 </p>
 """, unsafe_allow_html=True)
 
@@ -343,7 +343,31 @@ with tab_inicio:
             <p>Casos reales, fallas corregidas y aprendizajes técnicos.</p>
         </div>
         """, unsafe_allow_html=True)
+    col10, col11, col12 = st.columns(3)
 
+    with col10:
+        st.markdown("""
+        <div class="card card-green">
+            <h4>🌿 Git / GitHub</h4>
+            <p>Versionamiento, commits, ramas, push, pull, merge y despliegue desde repositorio.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col11:
+        st.markdown("""
+        <div class="card card-blue">
+            <h4>🧪 Prácticas guiadas</h4>
+            <p>Ejercicios paso a paso para reforzar SQL, Python, Power BI, Excel y Streamlit.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col12:
+        st.markdown("""
+        <div class="card card-yellow">
+            <h4>⭐ Favoritos</h4>
+            <p>Apuntes importantes para repasar rápido desde el celular.</p>
+        </div>
+        """, unsafe_allow_html=True)
 # ============================================================
 # TAB BUSCAR
 # ============================================================
@@ -379,7 +403,7 @@ with tab_practica:
 
     modulo_practica = st.selectbox(
         "Selecciona qué quieres practicar",
-        ["Seleccione...", "Python", "SQL", "Power BI", "Excel", "NEXUS / Kardex", "Streamlit", "PDF", "Control ANS"]
+        ["Seleccione...", "Python", "SQL", "Power BI", "Excel", "NEXUS / Kardex", "Streamlit", "PDF", "Control ANS","Git / GitHub"]
     )
 
     nivel = st.selectbox(
@@ -526,6 +550,26 @@ else:
         st.markdown("### Reto")
         st.info("Crea una tabla con fecha_creacion, fecha_limite y fecha_cierre. Calcula el estado ANS.")
 
+    elif modulo_practica == "Git / GitHub":
+        st.success("🌿 Práctica Git / GitHub - Nivel " + nivel)
+
+        st.markdown("### Objetivo")
+        st.write("Practicar el flujo básico para guardar cambios y subirlos a GitHub.")
+
+        st.markdown("### Explicación")
+        st.write("Git permite controlar versiones del proyecto. GitHub permite guardar el repositorio en la nube.")
+
+        st.markdown("### Código guía")
+        st.code("""
+    git status
+    git add .
+    git commit -m "Descripcion del cambio"
+    git push
+    """, language="bash")
+
+        st.markdown("### Reto")
+        st.info("Haz un cambio pequeño en la app, revisa el estado con git status, crea un commit y súbelo a GitHub.")
+
 # ============================================================
 # TAB GUARDAR
 # ============================================================
@@ -566,11 +610,6 @@ with tab_favoritos:
     else:
         st.info("Aún no tienes favoritos guardados.")
 
-filtro_modulo = st.selectbox(
-    "Filtrar por módulo",
-    ["Todos", "Python", "SQL", "Power BI", "Excel", "NEXUS", "PDF", "ANS"]
-)
-
 # ============================================================
 # TAB BIBLIOTECA
 # ============================================================
@@ -580,7 +619,7 @@ with tab_biblioteca:
 
     filtro_modulo = st.selectbox(
         "Filtrar por módulo",
-        ["Todos", "Python", "SQL", "Power BI", "Excel", "NEXUS", "PDF", "ANS"],
+        ["Todos", "Python", "SQL", "Power BI", "Excel", "NEXUS", "PDF", "ANS", "Git / GitHub"],
         key="filtro_biblioteca"
     )
 
