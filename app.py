@@ -26,6 +26,10 @@ def crear_tabla_si_no_existe():
         fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     """)
+    try:
+        cursor.execute("ALTER TABLE conocimiento ADD COLUMN favorito INTEGER DEFAULT 0")
+    except sqlite3.OperationalError:
+        pass
 
     conn.commit()
     conn.close()
@@ -73,9 +77,9 @@ def obtener_conocimiento():
     cursor = conn.cursor()
 
     cursor.execute("""
-    SELECT id, modulo, titulo, descripcion, codigo, fecha
+    SELECT id, modulo, titulo, descripcion, codigo, fecha, favorito
     FROM conocimiento
-    ORDER BY id DESC
+    ORDER BY id DESC, id DESC
     """)
 
     datos = cursor.fetchall()
@@ -104,6 +108,35 @@ def actualizar_conocimiento(id, titulo, descripcion, codigo):
 
     conn.commit()
     conn.close()
+
+def cambiar_favorito(id_, favorito):
+    conn = conectar_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    UPDATE conocimiento
+    SET favorito = ?
+    WHERE id = ?
+    """, (favorito, id_))
+
+    conn.commit()
+    conn.close()
+
+
+def obtener_favoritos():
+    conn = conectar_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT id, modulo, titulo, descripcion, codigo, fecha, favorito
+    FROM conocimiento
+    WHERE favorito = 1
+    ORDER BY id DESC
+    """)
+
+    datos = cursor.fetchall()
+    conn.close()
+    return datos
 
 st.set_page_config(
     page_title="DevData Academy",
@@ -184,8 +217,24 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🧠 DevData Academy")
-st.subheader("Mi tutor personal de Python, SQL, Power BI, Excel, Streamlit y NEXUS")
+st.markdown("""
+<h1 style="
+    font-size: clamp(26px, 7vw, 42px);
+    white-space: nowrap;
+    margin-bottom: 0;
+">
+🧠 DevData Academy
+</h1>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<p style="
+    font-size: clamp(15px, 4vw, 22px);
+    line-height: 1.4;
+">
+Mi tutor personal de Python, SQL, Power BI, Excel, Streamlit y NEXUS
+</p>
+""", unsafe_allow_html=True)
 
 st.markdown("""
 Bienvenido a tu sistema personal de aprendizaje técnico.
@@ -201,11 +250,12 @@ Aquí vas a:
 
 st.divider()
 
-tab_inicio, tab_buscar, tab_practica, tab_guardar, tab_biblioteca = st.tabs([
+tab_inicio, tab_buscar, tab_practica, tab_guardar, tab_favoritos, tab_biblioteca = st.tabs([
     "🏠 Inicio",
     "🔎 Buscar",
     "🧪 Práctica",
     "🧠 Guardar",
+    "⭐ Favoritos",
     "📚 Biblioteca"
 ])
 
@@ -499,6 +549,23 @@ with tab_guardar:
             guardar_conocimiento(modulo, titulo, descripcion, codigo)
             st.success("Conocimiento guardado correctamente.")
 
+with tab_favoritos:
+    st.markdown("## ⭐ Favoritos")
+
+    favoritos = obtener_favoritos()
+
+    if favoritos:
+        for id_, modulo, titulo, descripcion, codigo, fecha, favorito in favoritos:
+            with st.expander(f"⭐ {titulo} | {modulo}"):
+                st.markdown(f"**Módulo:** {modulo}")
+                st.markdown(f"**Fecha:** {fecha}")
+                st.markdown(descripcion)
+
+                if codigo:
+                    st.code(codigo)
+    else:
+        st.info("Aún no tienes favoritos guardados.")
+
 # ============================================================
 # TAB BIBLIOTECA
 # ============================================================
@@ -509,7 +576,7 @@ with tab_biblioteca:
     datos = obtener_conocimiento()
 
     if datos:
-        for id_, modulo, titulo, descripcion, codigo, fecha in datos:
+        for id_, modulo, titulo, descripcion, codigo, fecha, favorito in datos:
 
             with st.expander(f"📌 {titulo} | {modulo}"):
 
@@ -521,6 +588,16 @@ with tab_biblioteca:
                 nuevo_codigo = st.text_area("Código", value=codigo, key=f"c_{id_}")
 
                 col1, col2 = st.columns(2)
+                
+                es_favorito = st.checkbox(
+                    "⭐ Marcar como favorito",
+                    value=bool(favorito),
+                    key=f"fav_{id_}"
+                )
+
+                if es_favorito != bool(favorito):
+                    cambiar_favorito(id_, 1 if es_favorito else 0)
+                    st.rerun()
 
                 with col1:
                     if st.button("💾 Guardar cambios", key=f"g_{id_}"):
