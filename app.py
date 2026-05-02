@@ -153,12 +153,19 @@ p {
 # =========================================
 # HEADER LIMPIO (100% RESPONSIVE)
 # =========================================
-st.container()
+st.markdown("""
+<div style="
+    font-size:18px;
+    font-weight:600;
+    color:#22c55e;
+    text-align:center;
+    margin-bottom:2px;
+">
+🚀 Plataforma de Entrenamiento
+</div>
+""", unsafe_allow_html=True)
 
-st.markdown("## 🚀 Plataforma de Entrenamiento")
-st.caption("Aprende SQL, Python y automatización")
-
-st.divider()
+st.markdown("<p style='text-align:center; font-size:12px;'>Aprende SQL, Python y automatización</p>", unsafe_allow_html=True)
 
 
 # =========================================
