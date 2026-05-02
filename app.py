@@ -73,7 +73,7 @@ def obtener_conocimiento():
     cursor = conn.cursor()
 
     cursor.execute("""
-    SELECT modulo, titulo, descripcion, codigo, fecha
+    SELECT id, modulo, titulo, descripcion, codigo, fecha
     FROM conocimiento
     ORDER BY id DESC
     """)
@@ -82,6 +82,28 @@ def obtener_conocimiento():
     conn.close()
     return datos
 
+def eliminar_conocimiento(id):
+    conn = conectar_db()
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM conocimiento WHERE id = ?", (id,))
+
+    conn.commit()
+    conn.close()
+
+
+def actualizar_conocimiento(id, titulo, descripcion, codigo):
+    conn = conectar_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    UPDATE conocimiento
+    SET titulo = ?, descripcion = ?, codigo = ?
+    WHERE id = ?
+    """, (titulo, descripcion, codigo, id))
+
+    conn.commit()
+    conn.close()
 
 st.set_page_config(
     page_title="DevData Academy",
@@ -487,13 +509,28 @@ with tab_biblioteca:
     datos = obtener_conocimiento()
 
     if datos:
-        for modulo, titulo, descripcion, codigo, fecha in datos:
+        for id_, modulo, titulo, descripcion, codigo, fecha in datos:
+
             with st.expander(f"📌 {titulo} | {modulo}"):
+
                 st.markdown(f"**Módulo:** {modulo}")
                 st.markdown(f"**Fecha:** {fecha}")
-                st.markdown(descripcion)
 
-                if codigo:
-                    st.code(codigo)
+                nuevo_titulo = st.text_input("Título", value=titulo, key=f"t_{id_}")
+                nueva_desc = st.text_area("Descripción", value=descripcion, key=f"d_{id_}")
+                nuevo_codigo = st.text_area("Código", value=codigo, key=f"c_{id_}")
+
+                col1, col2 = st.columns(2)
+
+                with col1:
+                    if st.button("💾 Guardar cambios", key=f"g_{id_}"):
+                        actualizar_conocimiento(id_, nuevo_titulo, nueva_desc, nuevo_codigo)
+                        st.success("Actualizado correctamente")
+
+                with col2:
+                    if st.button("🗑️ Eliminar", key=f"e_{id_}"):
+                        eliminar_conocimiento(id_)
+                        st.warning("Eliminado")
+                        st.rerun()
     else:
         st.info("Aún no hay conocimiento guardado.")
