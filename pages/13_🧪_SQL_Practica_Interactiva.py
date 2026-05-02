@@ -101,7 +101,7 @@ Prueba estas consultas:
 👉 SELECT * FROM clientes  
 
 2. Filtrar por ciudad  
-👉 SELECT * FROM clientes WHERE ciudad = 'Medellín'  
+👉 SELECT * FROM clientes WHERE ciudad = 'Medellin'  
 
 3. Ordenar por edad  
 👉 SELECT * FROM clientes ORDER BY edad DESC  
