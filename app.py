@@ -165,7 +165,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("<p style='text-align:center; font-size:12px;'>Aprende SQL, Python y automatización</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; font-size:22px;'>Aprende SQL, Python y automatización</p>", unsafe_allow_html=True)
 
 
 # =========================================
