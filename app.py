@@ -151,40 +151,12 @@ p {
 """, unsafe_allow_html=True)
 
 # =========================================
-# HEADER (FIX MOBILE PRO)
+# HEADER LIMPIO (100% RESPONSIVE)
 # =========================================
-st.markdown("""
-<div style="
-    background: linear-gradient(90deg,#16a34a,#065f46);
-    padding:10px;
-    border-radius:10px;
-    margin-bottom:10px;
-    width:100%;
-    box-sizing:border-box;
-">
+st.container()
 
-    <div style="
-        font-size:16px;
-        font-weight:bold;
-        color:white;
-        line-height:1.3;
-        word-wrap:break-word;
-    ">
-        🚀 Plataforma de Entrenamiento
-    </div>
-
-    <div style="
-        font-size:12px;
-        color:#d1fae5;
-        margin-top:4px;
-        line-height:1.3;
-        word-wrap:break-word;
-    ">
-        Aprende SQL, Python y automatización
-    </div>
-
-</div>
-""", unsafe_allow_html=True)
+st.markdown("## 🚀 Plataforma de Entrenamiento")
+st.caption("Aprende SQL, Python y automatización")
 
 st.divider()
 
