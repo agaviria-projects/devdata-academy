@@ -79,7 +79,7 @@ def obtener_conocimiento():
     cursor.execute("""
     SELECT id, modulo, titulo, descripcion, codigo, fecha, favorito
     FROM conocimiento
-    ORDER BY id DESC, id DESC
+    ORDER BY favorito DESC, id DESC
     """)
 
     datos = cursor.fetchall()
@@ -566,6 +566,11 @@ with tab_favoritos:
     else:
         st.info("Aún no tienes favoritos guardados.")
 
+filtro_modulo = st.selectbox(
+    "Filtrar por módulo",
+    ["Todos", "Python", "SQL", "Power BI", "Excel", "NEXUS", "PDF", "ANS"]
+)
+
 # ============================================================
 # TAB BIBLIOTECA
 # ============================================================
@@ -573,22 +578,27 @@ with tab_favoritos:
 with tab_biblioteca:
     st.markdown("## 📚 Conocimiento guardado")
 
+    filtro_modulo = st.selectbox(
+        "Filtrar por módulo",
+        ["Todos", "Python", "SQL", "Power BI", "Excel", "NEXUS", "PDF", "ANS"],
+        key="filtro_biblioteca"
+    )
+
     datos = obtener_conocimiento()
+
+    if filtro_modulo != "Todos":
+        datos = [d for d in datos if d[1] == filtro_modulo]
 
     if datos:
         for id_, modulo, titulo, descripcion, codigo, fecha, favorito in datos:
 
-            with st.expander(f"📌 {titulo} | {modulo}"):
+            icono = "⭐" if favorito else "📌"
+
+            with st.expander(f"{icono} {titulo} | {modulo}"):
 
                 st.markdown(f"**Módulo:** {modulo}")
                 st.markdown(f"**Fecha:** {fecha}")
 
-                nuevo_titulo = st.text_input("Título", value=titulo, key=f"t_{id_}")
-                nueva_desc = st.text_area("Descripción", value=descripcion, key=f"d_{id_}")
-                nuevo_codigo = st.text_area("Código", value=codigo, key=f"c_{id_}")
-
-                col1, col2 = st.columns(2)
-                
                 es_favorito = st.checkbox(
                     "⭐ Marcar como favorito",
                     value=bool(favorito),
@@ -599,15 +609,22 @@ with tab_biblioteca:
                     cambiar_favorito(id_, 1 if es_favorito else 0)
                     st.rerun()
 
+                nuevo_titulo = st.text_input("Título", value=titulo, key=f"t_{id_}")
+                nueva_desc = st.text_area("Descripción", value=descripcion, key=f"d_{id_}")
+                nuevo_codigo = st.text_area("Código", value=codigo or "", key=f"c_{id_}")
+
+                col1, col2 = st.columns(2)
+
                 with col1:
                     if st.button("💾 Guardar cambios", key=f"g_{id_}"):
                         actualizar_conocimiento(id_, nuevo_titulo, nueva_desc, nuevo_codigo)
                         st.success("Actualizado correctamente")
+                        st.rerun()
 
                 with col2:
                     if st.button("🗑️ Eliminar", key=f"e_{id_}"):
                         eliminar_conocimiento(id_)
-                        st.warning("Eliminado")
+                        st.warning("Eliminado correctamente")
                         st.rerun()
     else:
-        st.info("Aún no hay conocimiento guardado.")
+        st.info("Aún no hay conocimiento guardado para este filtro.")
