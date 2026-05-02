@@ -92,9 +92,22 @@ html, body {
 
 .header {
     background: linear-gradient(90deg,#16a34a,#065f46);
-    padding:12px;
+    padding:10px;
     border-radius:10px;
     margin-bottom:10px;
+}
+
+/* 🔥 CLAVE PARA CELULAR */
+.header h2 {
+    margin:0;
+    font-size: clamp(16px, 5vw, 22px);
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.header p {
+    margin:4px 0 0 0;
+    font-size: clamp(11px, 3vw, 14px);
 }
 
 .card {
