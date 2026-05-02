@@ -232,7 +232,7 @@ st.markdown("""
     font-size: clamp(15px, 4vw, 22px);
     line-height: 1.4;
 ">
-Mi tutor personal de Python, SQL, Power BI, Excel, Streamlit ,Nexus,Control ANS,Comprensor inteligente PDF, Git / Git
+Mi tutor personal de Python, SQL, Power BI, Excel, Streamlit ,NEXUS,Control ANS,Compresor inteligente PDF, Git / GitHub
 </p>
 """, unsafe_allow_html=True)
 
