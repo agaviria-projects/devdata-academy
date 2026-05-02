@@ -155,11 +155,11 @@ p {
 # =========================================
 st.markdown("""
 <div style="
-    font-size:18px;
-    font-weight:600;
+    font-size:22px;
+    font-weight:700;
     color:#22c55e;
     text-align:center;
-    margin-bottom:2px;
+    margin-bottom:4px;
 ">
 🚀 Plataforma de Entrenamiento
 </div>
