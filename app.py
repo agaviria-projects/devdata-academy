@@ -237,7 +237,7 @@ Mi tutor personal de Python, SQL, Power BI, Excel, Streamlit ,NEXUS,Control ANS,
 """, unsafe_allow_html=True)
 
 st.markdown("""
-Bienvenido a tu sistema personal de aprendizaje técnico.
+Bienvenido a mi sistema personal de aprendizaje técnico, realizado por Héctor Alejandro Gaviria M.
 
 Aquí vas a:
 
