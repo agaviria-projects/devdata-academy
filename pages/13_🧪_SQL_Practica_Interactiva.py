@@ -23,8 +23,12 @@ def init_db():
     conn = get_connection()
     cursor = conn.cursor()
 
+    # 🔥 BORRAR TABLA SI EXISTE
+    cursor.execute("DROP TABLE IF EXISTS clientes")
+
+    # 🔥 CREAR NUEVA
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS clientes (
+    CREATE TABLE clientes (
         id INTEGER PRIMARY KEY,
         nombre TEXT,
         ciudad TEXT,
@@ -32,18 +36,17 @@ def init_db():
     )
     """)
 
-    # Insertar datos si está vacío
-    cursor.execute("SELECT COUNT(*) FROM clientes")
-    if cursor.fetchone()[0] == 0:
-        datos = [
-            ("Juan", "Medellin", 30),
-            ("Ana", "Bogota", 25),
-            ("Carlos", "Cali", 40),
-            ("Luisa", "Medellin", 35)
-        ]
-        cursor.executemany(
-            "INSERT INTO clientes (nombre, ciudad, edad) VALUES (?, ?, ?)", datos
-        )
+    # 🔥 INSERTAR SIN TILDES
+    datos = [
+        ("Juan", "medellin", 30),
+        ("Ana", "bogota", 25),
+        ("Carlos", "cali", 40),
+        ("Luisa", "medellin", 35)
+    ]
+
+    cursor.executemany(
+        "INSERT INTO clientes (nombre, ciudad, edad) VALUES (?, ?, ?)", datos
+    )
 
     conn.commit()
     conn.close()
