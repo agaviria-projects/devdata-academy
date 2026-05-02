@@ -36,10 +36,10 @@ def init_db():
     cursor.execute("SELECT COUNT(*) FROM clientes")
     if cursor.fetchone()[0] == 0:
         datos = [
-            ("Juan", "Medellín", 30),
-            ("Ana", "Bogotá", 25),
+            ("Juan", "Medellin", 30),
+            ("Ana", "Bogota", 25),
             ("Carlos", "Cali", 40),
-            ("Luisa", "Medellín", 35)
+            ("Luisa", "Medellin", 35)
         ]
         cursor.executemany(
             "INSERT INTO clientes (nombre, ciudad, edad) VALUES (?, ?, ?)", datos
