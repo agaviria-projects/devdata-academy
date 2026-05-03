@@ -56,7 +56,59 @@ Sirve para revisar:
 - Diferencias entre sistema y físico
 
 ---
+### 📦 Conciliación Inventario
 
+Permite comparar el inventario registrado en NEXUS contra el inventario físico contado en bodega.
+
+Es clave para cierres de inventario, auditorías internas y corrección controlada de diferencias.
+
+El archivo exportado incluye:
+
+- **Código**: código del material.
+- **Material**: nombre o descripción del material.
+- **Stock Sistema**: cantidad que NEXUS tiene registrada actualmente.
+- **Stock Físico**: cantidad contada físicamente en bodega.
+- **Diferencia**: cálculo automático entre físico y sistema.
+- **Tipo Ajuste Sugerido**: indica si se debe hacer AJUSTE ENTRADA, AJUSTE SALIDA u OK.
+- **Observación**: espacio para documentar la causa de la diferencia.
+
+Ejemplo:
+
+Si NEXUS muestra 290 unidades, pero físicamente hay 300:
+
+**Diferencia = 300 - 290 = 10**
+
+El sistema sugiere:
+
+**AJUSTE ENTRADA**
+
+Porque hay más material físico que el registrado en el sistema.
+
+Si NEXUS muestra 434 unidades, pero físicamente hay 424:
+
+**Diferencia = 424 - 434 = -10**
+
+El sistema sugiere:
+
+**AJUSTE SALIDA**
+
+Porque hay menos material físico que el registrado en el sistema.
+
+Regla clave:
+
+La conciliación **no corrige automáticamente** el inventario.  
+Solo ayuda a identificar diferencias y sugerir el tipo de ajuste.  
+La corrección se realiza manualmente desde **Ajustes Kardex**.
+La conciliación sirve para saber si lo que dice NEXUS coincide con lo que realmente hay en bodega.
+            
+La columna Diferencia funciona así:
+
+Stock Físico - Stock Sistema
+
+Si da positivo: ajuste entrada.
+Si da negativo: ajuste salida.
+Si da cero: está OK.            
+---
 ### 📊 Kardex
 
 Muestra el historial de movimientos de un material.
@@ -88,6 +140,125 @@ Sirve para responder preguntas como:
 
 ---
 
+### ⚙️ Ajustes Kardex
+
+Permite corregir diferencias puntuales.
+
+Debe usarse con mucho cuidado.
+
+No debe usarse para corregir entregas operativas mal hechas si existe una trazabilidad que debe conservarse.
+
+---
+### 🧠 ¿Cómo funciona un ajuste?
+
+El ajuste NO se hace “al aire”.
+
+Siempre se realiza sobre un **movimiento existente** (ID Movimiento).
+
+Ejemplo:
+
+- ID: 3085  
+- Tipo: SALIDA ELITE INGENIEROS  
+- Stock Antes: 94  
+- Stock Después: 92  
+
+El sistema ya tiene una trazabilidad previa.
+
+---
+
+### 🔍 ¿Qué hace realmente el ajuste?
+
+El ajuste crea un **nuevo movimiento** que corrige el stock a partir del último valor registrado.
+
+No modifica el movimiento original.
+
+Esto garantiza:
+
+- ✔ Trazabilidad completa  
+- ✔ Historial intacto  
+- ✔ Auditoría confiable  
+
+---
+
+### 🔧 Tipos de ajuste
+
+#### 🔹 AJUSTE ENTRADA
+
+Se usa cuando:
+
+```text
+El stock físico es MAYOR al stock del sistema
+
+Ejemplo:
+
+Sistema: 92
+Físico: 100
+Diferencia: +8
+
+Se debe hacer:
+
+AJUSTE ENTRADA por 8 unidades
+🔹 AJUSTE SALIDA
+
+Se usa cuando:
+
+El stock físico es MENOR al stock del sistema
+
+Ejemplo:
+
+Sistema: 92
+Físico: 85
+Diferencia: -7
+
+Se debe hacer:
+
+AJUSTE SALIDA por 7 unidades
+⚠️ Regla clave
+
+El ajuste SIEMPRE se aplica sobre el último movimiento válido del material en METROPOLITANA SUR.
+
+No se debe ajustar:
+
+Movimientos de zonas (ORIENTE, OCCIDENTE, etc.)
+Movimientos de traslado o transferencia
+Movimientos de entrega mal hecha
+🚫 Cuándo NO usar ajustes
+
+No usar ajustes para corregir errores operativos como:
+
+Entregas a técnico equivocado
+Asignaciones incorrectas
+Movimientos mal digitados
+
+En esos casos se debe usar:
+
+REINTEGRO
+
+y luego hacer el movimiento correcto.
+
+📌 Flujo correcto
+Exportar conciliación inventario
+Identificar diferencias
+Determinar tipo de ajuste
+Buscar el ID del último movimiento
+Aplicar ajuste (entrada o salida)
+Validar nuevo stock
+🏆 Objetivo
+
+El objetivo del ajuste es:
+
+Alinear el stock del sistema con la realidad física
+sin perder la trazabilidad del historial
+
+---
+
+# 🔥 RESUMEN PARA USUARIO (CLAVE)
+
+Puedes explicarlo así:
+
+```text
+El ajuste no corrige un movimiento anterior, crea uno nuevo que deja el inventario correcto.
+
 ### 🔁 Reintegros
 
 Permite devolver material al inventario.
@@ -114,17 +285,7 @@ Sirve para:
 - Auditar movimientos de equipos únicos
 
 ---
-
-### ⚙️ Ajustes Kardex
-
-Permite corregir diferencias puntuales.
-
-Debe usarse con mucho cuidado.
-
-No debe usarse para corregir entregas operativas mal hechas si existe una trazabilidad que debe conservarse.
-
----
-
+                                    
 ### 📈 Dashboard
 
 Permite visualizar indicadores generales del sistema.
