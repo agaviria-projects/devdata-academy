@@ -366,6 +366,22 @@ WHERE DATE(fecha) = '2026-05-01'
 ORDER BY fecha DESC;
 """, language="sql")
 
+st.markdown("### 16.Sumar el stock actual del sistema tomando el último movimiento de cada material")
+
+st.code("""
+SELECT SUM(stock_despues)
+FROM movimientos m
+JOIN (
+    SELECT id_material, MAX(id_movimiento) AS ultimo
+    FROM movimientos
+    WHERE id_almacen = (
+        SELECT id_almacen FROM almacenes WHERE nombre = 'METROPOLITANA SUR'
+    )
+    GROUP BY id_material
+) u ON m.id_material = u.id_material
+AND m.id_movimiento = u.ultimo;        
+""", language="sql")
+
 st.divider()
 
 st.markdown("## 🧯 Errores comunes y diagnóstico")
