@@ -1,5 +1,61 @@
 import streamlit as st
 
+st.markdown("## 🧠 Mentalidad de Analista / Desarrollador")
+
+st.info("""
+Un buen analista o desarrollador no se define por memorizar código,
+sino por entender cómo funciona el sistema.
+
+Lo importante no es la sintaxis, es la lógica.
+""")
+
+st.markdown("""
+### 🎯 Lo que realmente importa
+
+✔ Qué problema resuelve el sistema  
+✔ Cómo fluye la información  
+✔ Qué reglas de negocio hay detrás  
+✔ Qué impacto tiene cada acción  
+
+---
+
+### 🔍 En términos simples
+
+No necesitas entender cada línea de código,  
+pero sí debes entender:
+
+- Qué hace cada módulo
+- De dónde vienen los datos
+- Cómo se transforman
+- Qué resultado generan
+
+---
+
+### ⚠️ Error común
+
+❌ “Funciona pero no sé qué hace”  
+
+✔ “No memorizo el código, pero entiendo su lógica”
+
+---
+
+### 🏆 Nivel profesional
+
+Un analista de datos o desarrollador realmente útil es aquel que puede:
+
+- Explicar el sistema sin mostrar código  
+- Detectar errores en lógica de negocio  
+- Validar datos contra la realidad  
+- Proponer mejoras funcionales  
+
+---
+
+### 💡 Regla clave
+
+No necesitas saber cómo está escrito todo,  
+pero sí debes entender qué hace cada parte del sistema.
+""")
+
 # =========================================
 # CONFIGURACIÓN
 # =========================================
