@@ -305,7 +305,6 @@ sin perder trazabilidad
 
 # 💡 EXPLICACIÓN CORTA PARA USUARIO
 
-```text
 Aquí no ingresas cuánto ajustar, sino cuánto debería quedar realmente.
 
 NOTAS:
