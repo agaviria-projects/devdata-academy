@@ -95,7 +95,7 @@ git push -u origin main
 # =========================================
 # PASOS COMPLETOS (CLONAR UN REPOSITORIO)
 # =========================================
-st.header("⚙️ Comandos esenciales luego de clonar")
+st.header("⚙️ Luego de clonar....")
 
 st.code("""
 # 1️⃣ Crear entorno virtual
