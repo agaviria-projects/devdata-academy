@@ -217,6 +217,99 @@ AJUSTE SALIDA por 7 unidades
 
 El ajuste SIEMPRE se aplica sobre el último movimiento válido del material en METROPOLITANA SUR.
 
+### 🎯 Nueva cantidad correcta (Ajustes Kardex)
+
+Este campo define el valor final que debe quedar en el inventario después del ajuste.
+
+No se debe ingresar la diferencia, sino el **valor real físico contado en bodega**.
+
+---
+
+### 🧠 ¿Cómo funciona?
+
+Cuando se realiza un ajuste, el sistema ya conoce:
+
+- Stock actual en el sistema
+- Tipo de movimiento (entrada o salida)
+- Historial del material
+
+El usuario solo debe indicar:
+
+```text
+¿Cuánto debería quedar realmente?
+            
+🔍 Ejemplo 1 — Ajuste Entrada
+
+Sistema:
+
+Stock actual: 92
+Conteo físico: 100
+
+En el campo:
+
+Nueva cantidad correcta = 100
+
+El sistema internamente calcula:
+
+Diferencia = 100 - 92 = +8
+
+Y genera:
+
+AJUSTE ENTRADA por 8 unidades
+🔍 Ejemplo 2 — Ajuste Salida
+
+Sistema:
+
+Stock actual: 92
+Conteo físico: 85
+
+En el campo:
+
+Nueva cantidad correcta = 85
+
+El sistema internamente calcula:
+
+Diferencia = 85 - 92 = -7
+
+Y genera:
+
+AJUSTE SALIDA por 7 unidades
+⚠️ Regla clave
+NO ingresar la diferencia
+SÍ ingresar el valor final real
+🚫 Error común
+
+❌ Incorrecto:
+
+Sistema: 92
+Diferencia: +8
+Ingresar: 8  ❌
+
+✔ Correcto:
+
+Sistema: 92
+Físico: 100
+Ingresar: 100  ✔
+🧩 ¿Quién calcula la diferencia?
+
+El cálculo lo realiza automáticamente NEXUS:
+
+Determina si es entrada o salida
+Calcula la cantidad exacta
+Genera el movimiento de ajuste
+🏆 Objetivo
+Dejar el stock del sistema exactamente igual al inventario físico
+sin perder trazabilidad
+
+---
+
+# 💡 EXPLICACIÓN CORTA PARA USUARIO
+
+```text
+Aquí no ingresas cuánto ajustar, sino cuánto debería quedar realmente.
+
+NOTAS:
+                                               
 No se debe ajustar:
 
 Movimientos de zonas (ORIENTE, OCCIDENTE, etc.)
