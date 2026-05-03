@@ -92,6 +92,23 @@ git remote add origin URL
 # Subir código
 git push -u origin main
 """)
+# =========================================
+# PASOS COMPLETOS (CLONAR UN REPOSITORIO)
+# =========================================
+st.header("⚙️ Comandos esenciales")
+
+st.code("""
+# 1️⃣ Crear entorno virtual
+python -m venv venv
+
+# 2️⃣ Activarlo
+En Git Bash:
+source venv/Scripts/activate
+        
+# 3️⃣ Instalar dependencias
+pip install -r requirements.txt
+        
+""")
 
 # =========================================
 # FLUJO PROFESIONAL (CLAVE)
