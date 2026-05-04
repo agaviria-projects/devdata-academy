@@ -632,7 +632,41 @@ JOIN (
     )
     GROUP BY id_material
 ) u ON m.id_material = u.id_material
-AND m.id_movimiento = u.ultimo;        
+AND m.id_movimiento = u.ultimo;
+""", language="sql")
+
+st.markdown("### 17.Suma total por tipos de movimientos")
+
+st.code("""
+SELECT 
+    tm.nombre,
+    SUM(m.cantidad) as total,
+    tm.afecta
+FROM movimientos m
+INNER JOIN tipos_movimiento tm
+    ON m.id_tipo = tm.id_tipo
+INNER JOIN almacenes a
+    ON m.id_almacen = a.id_almacen
+WHERE UPPER(a.nombre) = 'METROPOLITANA SUR'
+GROUP BY tm.nombre, tm.afecta
+ORDER BY tm.afecta DESC;
+""", language="sql")
+
+st.markdown("### 18.Calcula:Entradas - Salidas = Stock teórico por movimientos")
+
+st.code("""
+SELECT 
+    tm.nombre,
+    SUM(m.cantidad) as total,
+    tm.afecta
+FROM movimientos m
+INNER JOIN tipos_movimiento tm
+    ON m.id_tipo = tm.id_tipo
+INNER JOIN almacenes a
+    ON m.id_almacen = a.id_almacen
+WHERE UPPER(a.nombre) = 'METROPOLITANA SUR'
+GROUP BY tm.nombre, tm.afecta
+ORDER BY tm.afecta DESC;
 """, language="sql")
 
 st.divider()
