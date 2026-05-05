@@ -671,32 +671,39 @@ ORDER BY tm.afecta DESC;
 
 st.markdown("### 19.Consulta control de inventario:Dashboard")
 st.code("""
+WITH resumen AS (
+    SELECT 
+        SUM(CASE WHEN t.afecta = 1 THEN m.cantidad ELSE 0 END) AS total_entradas,
+        SUM(CASE WHEN t.afecta = -1 THEN m.cantidad ELSE 0 END) AS total_salidas,
+        SUM(m.cantidad * t.afecta) AS flujo_kardex
+    FROM movimientos m
+    JOIN tipos_movimiento t ON m.id_tipo = t.id_tipo
+    JOIN almacenes a ON m.id_almacen = a.id_almacen
+    WHERE UPPER(a.nombre) = 'METROPOLITANA SUR'
+),
+
+stock AS (
+    SELECT 
+        SUM(m1.stock_despues) AS stock_actual
+    FROM movimientos m1
+    JOIN almacenes a1 ON m1.id_almacen = a1.id_almacen
+    WHERE UPPER(a1.nombre) = 'METROPOLITANA SUR'
+    AND m1.id_movimiento = (
+        SELECT MAX(m2.id_movimiento)
+        FROM movimientos m2
+        JOIN almacenes a2 ON m2.id_almacen = a2.id_almacen
+        WHERE m2.id_material = m1.id_material
+        AND UPPER(a2.nombre) = 'METROPOLITANA SUR'
+    )
+)
+
 SELECT 
-    ROUND(SUM(CASE WHEN t.afecta = 1 THEN m.cantidad ELSE 0 END), 2) AS total_entradas,
-    
-    ROUND(SUM(CASE WHEN t.afecta = -1 THEN m.cantidad ELSE 0 END), 2) AS total_salidas,
-
-    ROUND(SUM(m.cantidad * t.afecta), 2) AS flujo_kardex,
-
-    ROUND((
-        SELECT stock_despues 
-        FROM movimientos 
-        ORDER BY id_movimiento DESC 
-        LIMIT 1
-    ), 2) AS stock_actual,
-
-    ROUND((
-        (
-            SELECT stock_despues 
-            FROM movimientos 
-            ORDER BY id_movimiento DESC 
-            LIMIT 1
-        ) - SUM(m.cantidad * t.afecta)
-    ), 2) AS diferencia
-
-FROM movimientos m
-JOIN tipos_movimiento t 
-    ON m.id_tipo = t.id_tipo;
+    ROUND(r.total_entradas, 2) AS total_entradas,
+    ROUND(r.total_salidas, 2) AS total_salidas,
+    ROUND(r.flujo_kardex, 2) AS flujo_kardex,
+    ROUND(s.stock_actual, 2) AS stock_actual,
+    ROUND(s.stock_actual - r.flujo_kardex, 2) AS diferencia
+FROM resumen r, stock s;
 """, language="sql")                
 
 st.divider()
