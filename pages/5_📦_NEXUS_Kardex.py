@@ -669,6 +669,36 @@ GROUP BY tm.nombre, tm.afecta
 ORDER BY tm.afecta DESC;
 """, language="sql")
 
+st.markdown("### 19.Consulta control de inventario:Dashboard")
+st.code("""
+SELECT 
+    ROUND(SUM(CASE WHEN t.afecta = 1 THEN m.cantidad ELSE 0 END), 2) AS total_entradas,
+    
+    ROUND(SUM(CASE WHEN t.afecta = -1 THEN m.cantidad ELSE 0 END), 2) AS total_salidas,
+
+    ROUND(SUM(m.cantidad * t.afecta), 2) AS flujo_kardex,
+
+    ROUND((
+        SELECT stock_despues 
+        FROM movimientos 
+        ORDER BY id_movimiento DESC 
+        LIMIT 1
+    ), 2) AS stock_actual,
+
+    ROUND((
+        (
+            SELECT stock_despues 
+            FROM movimientos 
+            ORDER BY id_movimiento DESC 
+            LIMIT 1
+        ) - SUM(m.cantidad * t.afecta)
+    ), 2) AS diferencia
+
+FROM movimientos m
+JOIN tipos_movimiento t 
+    ON m.id_tipo = t.id_tipo;
+""", language="sql")                
+
 st.divider()
 
 st.markdown("## 🧯 Errores comunes y diagnóstico")
