@@ -436,9 +436,9 @@ Aprender a:
         st.code("""
 df.info()
 
-df.head()
+print(df.head())
 
-df.describe()
+print(df.describe())
         """, language="python")
 
         st.markdown("### 🔍 Explicación")
