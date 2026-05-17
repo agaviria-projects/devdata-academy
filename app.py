@@ -6,7 +6,7 @@ import streamlit as st
 # CONFIG
 # =========================================
 st.set_page_config(
-    page_title="Plataforma de Entrenamiento en Datos y Desarrollo",
+    page_title="DevData Academy",
     page_icon="🧠",
     layout="wide"
 )
