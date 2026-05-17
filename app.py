@@ -171,8 +171,14 @@ st.markdown("<p style='text-align:center; font-size:22px;'>Aprende SQL, Python y
 # =========================================
 # TABS
 # =========================================
-tab1,tab2,tab3,tab4,tab5,tab6=st.tabs([
-"🏠 Inicio","🔎 Buscar","🧪 Práctica","🧠 Guardar","⭐ Favoritos","📚 Biblioteca"
+tab1,tab2,tab3,tab4,tab5,tab6,tab7 = st.tabs([
+    "🏠 Inicio",
+    "🔎 Buscar",
+    "🧪 Práctica",
+    "🚀 Python Guiado",
+    "🧠 Guardar",
+    "⭐ Favoritos",
+    "📚 Biblioteca"
 ])
 
 # =========================================
@@ -243,7 +249,7 @@ with tab3:
 # =========================================
 # GUARDAR
 # =========================================
-with tab4:
+with tab5:
     mod=st.selectbox("Modulo",["Python","SQL"])
     t=st.text_input("Titulo")
     d=st.text_area("Descripcion")
@@ -254,30 +260,175 @@ with tab4:
         st.success("Guardado")
 
 # =========================================
-# FAVORITOS
+# PYTHON GUIADO
 # =========================================
-with tab5:
-    data=obtener()
+with tab4:
 
-    for r in data:
-        if r[6]==1:
-            st.write(r)
+    st.markdown("## 🚀 Python Automatización Guiada")
 
-# =========================================
-# BIBLIOTECA
-# =========================================
-with tab6:
-    data=obtener()
+    st.info("""
+    Aprende paso a paso cómo automatizar procesos reales:
+    
+    ✅ Leer archivos Excel
+    ✅ Limpiar datos
+    ✅ Convertir fechas
+    ✅ Realizar cálculos
+    ✅ Agrupar información
+    ✅ Exportar archivos
+    ✅ Automatizar procesos empresariales
+    """)
 
-    for r in data:
-        if modo_movil:
-            st.write(r[2])
-            if st.button("⭐",key=f"m{r[0]}"):
-                favorito(r[0],1)
-        else:
-            col1,col2=st.columns([6,1])
-            with col1:
-                st.write(r[2])
-            with col2:
-                if st.button("⭐",key=r[0]):
-                    favorito(r[0],1)
+    paso = st.selectbox(
+        "Seleccione una práctica",
+        [
+            "1️⃣ Leer archivo Excel",
+            "2️⃣ Inspeccionar DataFrame",
+            "3️⃣ Limpiar texto",
+            "4️⃣ Convertir fechas",
+            "5️⃣ Crear cálculos",
+            "6️⃣ Agrupar información",
+            "7️⃣ Exportar a Excel"
+        ]
+    )
+
+    if paso == "1️⃣ Leer archivo Excel":
+    
+        st.markdown("## 📂 Paso 1 — Lectura de Excel")
+
+        st.warning("""
+    Escenario real:
+
+    Un analista recibe un archivo Excel exportado desde SAP
+    o desde un ERP empresarial y necesita procesarlo con Python.
+        """)
+
+        st.markdown("### ✅ Objetivo")
+
+        st.success("""
+    Aprender a:
+
+    ✔ leer archivos Excel
+    ✔ cargar DataFrames
+    ✔ visualizar registros
+    ✔ validar columnas
+    ✔ iniciar automatización
+        """)
+
+        st.markdown("### 📦 Librería utilizada")
+
+        st.code("""
+    pip install pandas openpyxl
+        """, language="bash")
+
+        st.markdown("### 🧠 Código")
+
+        st.code("""
+    import pandas as pd
+
+    df = pd.read_excel("ventas.xlsx")
+
+    print(df.head())
+        """, language="python")
+
+        st.markdown("### 🔍 Explicación línea por línea")
+
+        st.info("""
+    📌 import pandas as pd
+    Importa la librería pandas.
+
+    📌 pd.read_excel()
+    Lee el archivo Excel.
+
+    📌 df
+    Representa el DataFrame.
+
+    📌 head()
+    Muestra los primeros registros.
+        """)
+
+        st.markdown("### ⚠️ Error común")
+
+        st.error("""
+    Error:
+    Missing optional dependency openpyxl
+
+    Solución:
+    pip install openpyxl
+        """)
+
+        st.markdown("### 💼 Caso empresarial")
+
+        st.success("""
+    Ejemplo real:
+
+    ✔ ventas SAP
+    ✔ inventarios
+    ✔ reportes financieros
+    ✔ entregas logísticas
+    ✔ movimientos de almacén
+        """)
+    elif paso == "2️⃣ Inspeccionar DataFrame":
+        
+        st.markdown("## 🔍 Paso 2 — Inspeccionar DataFrame")
+
+        st.warning("""
+    Escenario real:
+
+    Después de leer un archivo Excel,
+    el analista debe revisar la estructura
+    del DataFrame antes de limpiar o calcular.
+        """)
+
+        st.markdown("### ✅ Objetivo")
+
+        st.success("""
+    Aprender a:
+
+    ✔ revisar columnas
+    ✔ validar tipos de datos
+    ✔ detectar nulos
+    ✔ inspeccionar registros
+    ✔ entender la estructura
+        """)
+
+        st.markdown("### 🧠 Código")
+
+        st.code("""
+    df.info()
+
+    df.head()
+
+    df.describe()
+        """, language="python")
+
+        st.markdown("### 🔍 Explicación")
+
+        st.info("""
+    📌 df.info()
+    Muestra columnas y tipos de datos.
+
+    📌 df.head()
+    Muestra los primeros registros.
+
+    📌 df.describe()
+    Genera estadísticas numéricas.
+        """)
+
+        st.markdown("### ⚠️ Error común")
+
+        st.error("""
+    No revisar los tipos de datos antes
+    de hacer cálculos o visualizaciones.
+        """)
+
+        st.markdown("### 💼 Caso empresarial")
+
+        st.success("""
+    Ejemplo real:
+
+    ✔ validar exportes SAP
+    ✔ detectar columnas vacías
+    ✔ revisar fechas incorrectas
+    ✔ validar cantidades
+    ✔ encontrar errores de carga
+        """)     
