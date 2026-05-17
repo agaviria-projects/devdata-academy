@@ -956,7 +956,7 @@ Ejemplo real:
 
         st.code("""
     resumen = (
-        df.groupby("ciudad")["ventas"]
+        df.groupby("ciudad")["total"]
         .sum()
     )
         """, language="python")
