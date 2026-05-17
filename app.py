@@ -984,6 +984,24 @@ Ejemplo real:
 
     Suma valores numéricos.
 
+    📌 resumen
+
+    Variable donde se guarda
+    la agrupación final.
+
+    📌 print(resumen)
+
+    Muestra el resultado agrupado
+    en consola.
+
+    📌 ¿Para qué sirve?
+
+    ✔ validar KPIs
+    ✔ revisar totales
+    ✔ validar dashboards
+    ✔ verificar agrupaciones
+    ✔ análisis empresarial                        
+
     📌 ["ventas"]
 
     Selecciona columna numérica.
