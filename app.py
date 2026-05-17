@@ -360,7 +360,22 @@ with tab4:
 
         st.success("""
     Ejemplo real:
+    st.markdown("### 📤 Probar con archivo real")
 
+    archivo = st.file_uploader(
+        "Suba un archivo Excel",
+        type=["xlsx"]
+    )
+
+    if archivo is not None:
+
+        import pandas as pd
+
+        df = pd.read_excel(archivo)
+
+        st.success("✅ Archivo cargado correctamente")
+
+        st.dataframe(df.head())
     ✔ ventas SAP
     ✔ inventarios
     ✔ reportes financieros
