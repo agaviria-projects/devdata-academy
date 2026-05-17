@@ -267,15 +267,15 @@ with tab4:
     st.markdown("## 🚀 Python Automatización Guiada")
 
     st.info("""
-    Aprende paso a paso cómo automatizar procesos reales:
-    
-    ✅ Leer archivos Excel
-    ✅ Limpiar datos
-    ✅ Convertir fechas
-    ✅ Realizar cálculos
-    ✅ Agrupar información
-    ✅ Exportar archivos
-    ✅ Automatizar procesos empresariales
+Aprende paso a paso cómo automatizar procesos reales:
+
+✅ Leer archivos Excel
+✅ Limpiar datos
+✅ Convertir fechas
+✅ Realizar cálculos
+✅ Agrupar información
+✅ Exportar archivos
+✅ Automatizar procesos empresariales
     """)
 
     paso = st.selectbox(
@@ -291,164 +291,182 @@ with tab4:
         ]
     )
 
+    # =========================================
+    # PASO 1
+    # =========================================
     if paso == "1️⃣ Leer archivo Excel":
-    
+
         st.markdown("## 📂 Paso 1 — Lectura de Excel")
 
         st.warning("""
-    Escenario real:
+Escenario real:
 
-    Un analista recibe un archivo Excel exportado desde SAP
-    o desde un ERP empresarial y necesita procesarlo con Python.
+Un analista recibe un archivo Excel exportado desde SAP
+o desde un ERP empresarial y necesita procesarlo con Python.
         """)
 
         st.markdown("### ✅ Objetivo")
 
         st.success("""
-    Aprender a:
+Aprender a:
 
-    ✔ leer archivos Excel
-    ✔ cargar DataFrames
-    ✔ visualizar registros
-    ✔ validar columnas
-    ✔ iniciar automatización
+✔ leer archivos Excel
+✔ cargar DataFrames
+✔ visualizar registros
+✔ validar columnas
+✔ iniciar automatización
         """)
 
         st.markdown("### 📦 Librería utilizada")
 
         st.code("""
-    pip install pandas openpyxl
+pip install pandas openpyxl
         """, language="bash")
 
         st.markdown("### 🧠 Código")
 
         st.code("""
-    import pandas as pd
+import pandas as pd
 
-    df = pd.read_excel("ventas.xlsx")
+df = pd.read_excel("ventas.xlsx")
 
-    print(df.head())
+print(df.head())
         """, language="python")
 
         st.markdown("### 🔍 Explicación línea por línea")
 
         st.info("""
-    📌 import pandas as pd
-    Importa la librería pandas.
+📌 import pandas as pd
+Importa la librería pandas.
 
-    📌 pd.read_excel()
-    Lee el archivo Excel.
+📌 pd.read_excel()
+Lee el archivo Excel.
 
-    📌 df
-    Representa el DataFrame.
+📌 df
+Representa el DataFrame.
 
-    📌 head()
-    Muestra los primeros registros.
+📌 head()
+Muestra los primeros registros.
         """)
 
         st.markdown("### ⚠️ Error común")
 
         st.error("""
-    Error:
-    Missing optional dependency openpyxl
+Error:
+Missing optional dependency openpyxl
 
-    Solución:
-    pip install openpyxl
-        """)
-    st.markdown("### 💼 Caso empresarial")
-
-    st.success("""
-    Ejemplo real:
-
-    ✔ ventas SAP
-    ✔ inventarios
-    ✔ reportes financieros
-    ✔ entregas logísticas
-    ✔ movimientos de almacén
-    """)
-
-    # =========================================
-    # PRÁCTICA REAL
-    # =========================================
-    st.markdown("### 📤 Probar con archivo real")
-
-    archivo = st.file_uploader(
-        "Suba un archivo Excel",
-        type=["xlsx"]
-    )
-
-    if archivo is not None:
-
-        import pandas as pd
-
-        df = pd.read_excel(archivo)
-
-        st.success("✅ Archivo cargado correctamente")
-
-        st.dataframe(df.head())
-
-    elif paso == "2️⃣ Inspeccionar DataFrame":
-
-        st.markdown("## 🔍 Paso 2 — Inspeccionar DataFrame")
-
-        st.warning("""
-    Escenario real:
-
-    Después de leer un archivo Excel,
-    el analista debe revisar la estructura
-    del DataFrame antes de limpiar o calcular.
-        """)
-
-        st.markdown("### ✅ Objetivo")
-
-        st.success("""
-    Aprender a:
-
-    ✔ revisar columnas
-    ✔ validar tipos de datos
-    ✔ detectar nulos
-    ✔ inspeccionar registros
-    ✔ entender la estructura
-        """)
-
-        st.markdown("### 🧠 Código")
-
-        st.code("""
-    df.info()
-
-    df.head()
-
-    df.describe()
-        """, language="python")
-
-        st.markdown("### 🔍 Explicación")
-
-        st.info("""
-    📌 df.info()
-    Muestra columnas y tipos de datos.
-
-    📌 df.head()
-    Muestra los primeros registros.
-
-    📌 df.describe()
-    Genera estadísticas numéricas.
-        """)
-
-        st.markdown("### ⚠️ Error común")
-
-        st.error("""
-    No revisar los tipos de datos antes
-    de hacer cálculos o visualizaciones.
+Solución:
+pip install openpyxl
         """)
 
         st.markdown("### 💼 Caso empresarial")
 
         st.success("""
-    Ejemplo real:
+Ejemplo real:
 
-    ✔ validar exportes SAP
-    ✔ detectar columnas vacías
-    ✔ revisar fechas incorrectas
-    ✔ validar cantidades
-    ✔ encontrar errores de carga
+✔ ventas SAP
+✔ inventarios
+✔ reportes financieros
+✔ entregas logísticas
+✔ movimientos de almacén
+        """)
+
+        # =========================================
+        # PRÁCTICA REAL
+        # =========================================
+        st.markdown("### 📤 Probar con archivo real")
+
+        archivo = st.file_uploader(
+            "Suba un archivo Excel",
+            type=["xlsx"]
+        )
+
+        if archivo is not None:
+
+            import pandas as pd
+
+            df = pd.read_excel(archivo)
+
+            st.success("✅ Archivo cargado correctamente")
+
+            st.dataframe(df.head())
+
+            st.markdown("### 📊 Información del DataFrame")
+
+            st.write("Filas y columnas:")
+            st.write(df.shape)
+
+            st.markdown("### 🧾 Tipos de datos")
+
+            st.dataframe(
+                df.dtypes.astype(str)
+            )
+
+    # =========================================
+    # PASO 2
+    # =========================================
+    elif paso == "2️⃣ Inspeccionar DataFrame":
+
+        st.markdown("## 🔍 Paso 2 — Inspeccionar DataFrame")
+
+        st.warning("""
+Escenario real:
+
+Después de leer un archivo Excel,
+el analista debe revisar la estructura
+del DataFrame antes de limpiar o calcular.
+        """)
+
+        st.markdown("### ✅ Objetivo")
+
+        st.success("""
+Aprender a:
+
+✔ revisar columnas
+✔ validar tipos de datos
+✔ detectar nulos
+✔ inspeccionar registros
+✔ entender la estructura
+        """)
+
+        st.markdown("### 🧠 Código")
+
+        st.code("""
+df.info()
+
+df.head()
+
+df.describe()
+        """, language="python")
+
+        st.markdown("### 🔍 Explicación")
+
+        st.info("""
+📌 df.info()
+Muestra columnas y tipos de datos.
+
+📌 df.head()
+Muestra los primeros registros.
+
+📌 df.describe()
+Genera estadísticas numéricas.
+        """)
+
+        st.markdown("### ⚠️ Error común")
+
+        st.error("""
+No revisar los tipos de datos antes
+de hacer cálculos o visualizaciones.
+        """)
+
+        st.markdown("### 💼 Caso empresarial")
+
+        st.success("""
+Ejemplo real:
+
+✔ validar exportes SAP
+✔ detectar columnas vacías
+✔ revisar fechas incorrectas
+✔ validar cantidades
+✔ encontrar errores de carga
         """)
