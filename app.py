@@ -328,6 +328,7 @@ pip install pandas openpyxl
         st.code("""
 import pandas as pd
 
+
 df = pd.read_excel("ventas.xlsx")
 
 print(df.head())
@@ -378,7 +379,8 @@ Ejemplo real:
 
         archivo = st.file_uploader(
             "Suba un archivo Excel",
-            type=["xlsx"]
+            type=["xlsx"],
+            key="lectura_excel"
         )
 
         if archivo is not None:
@@ -470,3 +472,535 @@ Ejemplo real:
 ✔ validar cantidades
 ✔ encontrar errores de carga
         """)
+
+    # =========================================
+    # PASO 3
+    # =========================================
+    elif paso == "3️⃣ Limpiar texto":
+
+        st.markdown("## 🧹 Paso 3 — Limpieza de texto")
+
+        st.warning("""
+Escenario real:
+
+Los archivos SAP o ERP suelen venir
+con espacios, mayúsculas incorrectas
+o textos inconsistentes.
+        """)
+
+        st.markdown("### ✅ Objetivo")
+
+        st.success("""
+Aprender a:
+
+✔ limpiar espacios
+✔ convertir mayúsculas
+✔ estandarizar nombres
+✔ preparar datos para análisis
+        """)
+
+        st.markdown("### 🧠 Código")
+
+        st.code("""
+df["cliente"] = (
+    df["cliente"]
+    .str.strip()
+    .str.upper()
+)
+        """, language="python")
+
+        st.markdown("### 🔍 Explicación")
+
+        st.info("""
+📌 .str.strip()
+Elimina espacios al inicio y final.
+
+📌 .str.upper()
+Convierte texto a MAYÚSCULAS.
+
+📌 df["cliente"]
+Selecciona la columna cliente.
+        """)
+
+        st.markdown("### ⚠️ Error común")
+
+        st.error("""
+Intentar limpiar columnas numéricas
+como si fueran texto.
+        """)
+
+        st.markdown("### 💼 Caso empresarial")
+
+        st.success("""
+Ejemplo real:
+
+✔ nombres clientes
+✔ ciudades
+✔ proveedores
+✔ técnicos
+✔ materiales SAP
+        """)
+
+        # =========================================
+        # PRÁCTICA REAL
+        # =========================================
+        st.markdown("### 📤 Probar limpieza real")
+
+        archivo = st.file_uploader(
+            "Suba un archivo Excel",
+            type=["xlsx"],
+            key="limpieza_texto"
+        )
+
+        if archivo is not None:
+
+            import pandas as pd
+
+            df = pd.read_excel(archivo)
+
+            st.success("✅ Archivo cargado")
+
+            st.dataframe(df.head())
+
+            columna = st.selectbox(
+                "Seleccione columna texto",
+                df.columns
+            )
+
+            if st.button("🧹 Limpiar texto"):
+
+                df[columna] = (
+                    df[columna]
+                    .astype(str)
+                    .str.strip()
+                    .str.upper()
+                )
+
+                st.success("✅ Texto limpiado")
+
+                st.dataframe(df.head())
+
+    # =========================================
+    # PASO 4
+    # =========================================
+    elif paso == "4️⃣ Convertir fechas":
+
+        st.markdown("## 📅 Paso 4 — Conversión de fechas")
+
+        st.warning("""
+Escenario real:
+
+Los archivos empresariales suelen traer
+fechas en formatos inconsistentes.
+        """)
+
+        st.markdown("### ✅ Objetivo")
+
+        st.success("""
+Aprender a:
+
+✔ convertir fechas
+✔ detectar errores
+✔ validar formatos
+✔ preparar fechas para análisis
+        """)
+
+        st.markdown("### 🧠 Código")
+
+        st.code("""
+df["fecha"] = pd.to_datetime(
+    df["fecha"],
+    errors="coerce"
+)
+        """, language="python")
+
+        st.markdown("### 🔍 Explicación")
+
+        st.info("""
+📌 pd.to_datetime()
+Convierte texto a fecha.
+
+📌 errors="coerce"
+Convierte errores en NaT.
+        """)
+
+        st.markdown("### ⚠️ Error común")
+
+        st.error("""
+No validar formatos antes
+de crear análisis de tiempo.
+        """)
+
+        st.markdown("### 💼 Caso empresarial")
+
+        st.success("""
+Ejemplo real:
+
+✔ ventas
+✔ entregas
+✔ facturación
+✔ inventarios
+✔ movimientos SAP
+        """)
+
+        # =========================================
+        # PRÁCTICA REAL
+        # =========================================
+        st.markdown("### 📤 Probar conversión real")
+
+        archivo = st.file_uploader(
+            "Suba un archivo Excel",
+            type=["xlsx"],
+            key="fechas"
+        )
+
+        if archivo is not None:
+
+            import pandas as pd
+
+            df = pd.read_excel(archivo)
+
+            st.success("✅ Archivo cargado")
+
+            st.dataframe(df.head())
+
+            columna = st.selectbox(
+                "Seleccione columna fecha",
+                df.columns
+            )
+
+            if st.button("📅 Convertir fechas"):
+
+                df[columna] = pd.to_datetime(
+                    df[columna],
+                    errors="coerce"
+                )
+
+                st.success("✅ Fechas convertidas")
+
+                st.dataframe(df.head())
+
+                st.write(df.dtypes)
+
+    # =========================================
+    # PASO 5
+    # =========================================
+    elif paso == "5️⃣ Crear cálculos":
+
+        st.markdown("## 📊 Paso 5 — Crear cálculos")
+
+        st.warning("""
+Escenario real:
+
+Los analistas necesitan generar
+columnas calculadas automáticamente
+para KPIs y reportes.
+        """)
+
+        st.markdown("### ✅ Objetivo")
+
+        st.success("""
+Aprender a:
+
+✔ multiplicar columnas
+✔ crear métricas
+✔ automatizar cálculos
+✔ preparar análisis
+        """)
+
+        st.markdown("### 🧠 Código")
+
+        st.code("""
+df["total"] = (
+    df["cantidad"] * df["precio"]
+)
+        """, language="python")
+
+        st.markdown("### 🔍 Explicación")
+
+        st.info("""
+📌 df["total"]
+Crea nueva columna.
+
+📌 cantidad * precio
+Multiplica ambas columnas.
+        """)
+
+        st.markdown("### ⚠️ Error común")
+
+        st.error("""
+Intentar multiplicar columnas texto
+sin convertirlas a numérico.
+        """)
+
+        st.markdown("### 💼 Caso empresarial")
+
+        st.success("""
+Ejemplo real:
+
+✔ ventas
+✔ costos
+✔ inventarios
+✔ facturación
+✔ logística
+        """)
+
+        # =========================================
+        # PRÁCTICA REAL
+        # =========================================
+        st.markdown("### 📤 Probar cálculos reales")
+
+        archivo = st.file_uploader(
+            "Suba un archivo Excel",
+            type=["xlsx"],
+            key="calculos"
+        )
+
+        if archivo is not None:
+
+            import pandas as pd
+
+            df = pd.read_excel(archivo)
+
+            st.success("✅ Archivo cargado")
+
+            st.dataframe(df.head())
+
+            columna1 = st.selectbox(
+                "Seleccione primera columna",
+                df.columns,
+                key="col1"
+            )
+
+            columna2 = st.selectbox(
+                "Seleccione segunda columna",
+                df.columns,
+                key="col2"
+            )
+
+            if st.button("📊 Crear cálculo"):
+
+                df["resultado"] = (
+                    pd.to_numeric(df[columna1], errors="coerce")
+                    *
+                    pd.to_numeric(df[columna2], errors="coerce")
+                )
+
+                st.success("✅ Cálculo realizado")
+
+                st.dataframe(df.head())
+    # =========================================
+    # PASO 6
+    # =========================================
+    elif paso == "6️⃣ Agrupar información":
+
+        st.markdown("## 📦 Paso 6 — Agrupar información")
+
+        st.warning("""
+    Escenario real:
+
+    Los analistas necesitan resumir información
+    para generar KPIs y reportes ejecutivos.
+        """)
+
+        st.markdown("### ✅ Objetivo")
+
+        st.success("""
+    Aprender a:
+
+    ✔ agrupar datos
+    ✔ resumir información
+    ✔ generar KPIs
+    ✔ calcular totales
+    ✔ preparar reportes
+        """)
+
+        st.markdown("### 🧠 Código")
+
+        st.code("""
+    resumen = (
+        df.groupby("ciudad")["ventas"]
+        .sum()
+    )
+        """, language="python")
+
+        st.markdown("### 🔍 Explicación")
+
+        st.info("""
+    📌 groupby()
+    Agrupa registros.
+
+    📌 sum()
+    Suma valores.
+
+    📌 ["ventas"]
+    Selecciona columna numérica.
+        """)
+
+        st.markdown("### ⚠️ Error común")
+
+        st.error("""
+    Intentar agrupar columnas
+    que no existen o tienen errores.
+        """)
+
+        st.markdown("### 💼 Caso empresarial")
+
+        st.success("""
+    Ejemplo real:
+
+    ✔ ventas por ciudad
+    ✔ costos por proyecto
+    ✔ inventario por almacén
+    ✔ entregas por técnico
+    ✔ facturación por cliente
+        """)
+
+        # =========================================
+        # PRÁCTICA REAL
+        # =========================================
+        st.markdown("### 📤 Probar agrupación real")
+
+        archivo = st.file_uploader(
+            "Suba un archivo Excel",
+            type=["xlsx"],
+            key="groupby"
+        )
+
+        if archivo is not None:
+
+            import pandas as pd
+
+            df = pd.read_excel(archivo)
+
+            st.success("✅ Archivo cargado")
+
+            st.dataframe(df.head())
+
+            columna_grupo = st.selectbox(
+                "Seleccione columna para agrupar",
+                df.columns,
+                key="grupo"
+            )
+
+            columna_valor = st.selectbox(
+                "Seleccione columna numérica",
+                df.columns,
+                key="valor"
+            )
+
+            if st.button("📦 Agrupar información"):
+
+                resumen = (
+                    df.groupby(columna_grupo)[columna_valor]
+                    .sum()
+                    .reset_index()
+                )
+
+                st.success("✅ Agrupación realizada")
+
+                st.dataframe(resumen)
+    # =========================================
+    # PASO 7
+    # =========================================
+    elif paso == "7️⃣ Exportar a Excel":
+
+        st.markdown("## 📤 Paso 7 — Exportar a Excel")
+
+        st.warning("""
+    Escenario real:
+
+    Después de limpiar y transformar datos,
+    el analista necesita entregar un archivo
+    Excel listo para Power BI o reportes.
+        """)
+
+        st.markdown("### ✅ Objetivo")
+
+        st.success("""
+    Aprender a:
+
+    ✔ exportar DataFrames
+    ✔ generar archivos Excel
+    ✔ automatizar entregables
+    ✔ preparar archivos finales
+        """)
+
+        st.markdown("### 🧠 Código")
+
+        st.code("""
+    df.to_excel(
+        "archivo_limpio.xlsx",
+        index=False
+    )
+        """, language="python")
+
+        st.markdown("### 🔍 Explicación")
+
+        st.info("""
+    📌 to_excel()
+    Exporta DataFrame a Excel.
+
+    📌 index=False
+    Evita exportar índices.
+        """)
+
+        st.markdown("### ⚠️ Error común")
+
+        st.error("""
+    No instalar openpyxl
+    antes de exportar archivos.
+        """)
+
+        st.markdown("### 💼 Caso empresarial")
+
+        st.success("""
+    Ejemplo real:
+
+    ✔ archivos SAP limpios
+    ✔ reportes financieros
+    ✔ entregas Power BI
+    ✔ consolidaciones
+    ✔ inventarios finales
+        """)
+
+        # =========================================
+        # PRÁCTICA REAL
+        # =========================================
+        st.markdown("### 📤 Probar exportación real")
+
+        archivo = st.file_uploader(
+            "Suba un archivo Excel",
+            type=["xlsx"],
+            key="exportar_excel"
+        )
+
+        if archivo is not None:
+
+            import pandas as pd
+            from io import BytesIO
+
+            df = pd.read_excel(archivo)
+
+            st.success("✅ Archivo cargado")
+
+            st.dataframe(df.head())
+
+            output = BytesIO()
+
+            df.to_excel(
+                output,
+                index=False,
+                engine="openpyxl"
+            )
+
+            output.seek(0)
+
+            st.success("✅ Archivo preparado para descarga")
+
+            st.download_button(
+                label="📥 Descargar Excel",
+                data=output,
+                file_name="archivo_limpio.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
