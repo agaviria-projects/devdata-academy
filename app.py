@@ -451,7 +451,53 @@ Muestra columnas y tipos de datos.
 Muestra los primeros registros.
 
 📌 df.describe()
-Genera estadísticas numéricas.
+
+Genera estadísticas automáticas
+de columnas numéricas.
+
+Incluye:
+
+✔ promedio (mean)
+✔ mínimo (min)
+✔ máximo (max)
+✔ mediana (50%)
+✔ desviación estándar (std)
+
+📌 ¿Para qué sirve?
+
+✔ detectar errores
+✔ validar datos
+✔ encontrar valores anormales
+✔ revisar comportamiento datos
+✔ análisis rápido empresarial
+
+📌 Ejemplo real:
+
+Si el precio promedio es:
+
+5000
+
+pero aparece:
+
+999999
+
+puede existir un error de carga.
+
+📌 count
+
+Cantidad registros válidos.
+
+📌 mean
+
+Promedio.
+
+📌 std
+
+Qué tanto varían los datos.
+
+📌 min / max
+
+Valores mínimos y máximos.
         """)
 
         st.markdown("### ⚠️ Error común")
@@ -618,7 +664,55 @@ df["fecha"] = pd.to_datetime(
 
         st.info("""
 📌 pd.to_datetime()
-Convierte texto a fecha.
+
+Convierte texto a formato fecha.
+
+Ejemplo:
+
+'01/02/2025'
+↓
+2025-01-02 00:00:00
+
+📌 errors="coerce"
+
+Convierte errores en NaT.
+
+NaT significa:
+
+Not a Time.
+
+📌 ¿Por qué aparece 00:00:00?
+
+Porque pandas guarda:
+
+fecha + hora
+
+Si no existe hora,
+automáticamente coloca:
+
+00:00:00
+
+📌 ¿Cómo dejar solo fecha?
+
+Usando:
+
+.dt.date
+
+📌 Ejemplo:
+
+df["fecha"] = pd.to_datetime(
+    df["fecha"],
+    errors="coerce"
+).dt.date
+
+📌 Se usa para:
+
+✔ Power BI
+✔ dashboards
+✔ filtros tiempo
+✔ KPIs mensuales
+✔ análisis anual
+                
 
 📌 errors="coerce"
 Convierte errores en NaT.
@@ -722,8 +816,51 @@ df["total"] = (
 📌 df["total"]
 Crea nueva columna.
 
+📌 df["total"]
+
+Crea nueva columna calculada.
+
 📌 cantidad * precio
+
 Multiplica ambas columnas.
+
+📌 pd.to_numeric()
+
+Convierte texto a número.
+
+Ejemplo:
+
+'5000'
+↓
+5000
+
+📌 errors="coerce"
+
+Convierte errores en NaN
+sin detener el script.
+
+📌 ¿Por qué usarlo?
+
+Muchos archivos SAP/ERP
+traen números como texto.
+
+📌 Ejemplo real:
+
+'5000'
+'7000'
+'error'
+
+Sin pd.to_numeric()
+el cálculo puede fallar.
+
+📌 Se usa para:
+
+✔ ventas
+✔ costos
+✔ inventarios
+✔ KPIs
+✔ facturación
+                
         """)
 
         st.markdown("### ⚠️ Error común")
@@ -827,8 +964,56 @@ Ejemplo real:
         st.markdown("### 🔍 Explicación")
 
         st.info("""
+    
     📌 groupby()
-    Agrupa registros.
+
+    Agrupa registros similares.
+
+    Ejemplo:
+
+    MEDELLIN
+    MEDELLIN
+    BOGOTA
+
+    ↓ agrupación ↓
+
+    MEDELLIN = total ventas
+    BOGOTA = total ventas
+
+    📌 sum()
+
+    Suma valores numéricos.
+
+    📌 ["ventas"]
+
+    Selecciona columna numérica.
+
+    ⚠️ IMPORTANTE
+
+    La columna puede cambiar.
+
+    Ejemplo:
+
+    ["total"]
+    ["cantidad"]
+    ["costos"]
+
+    Depende del archivo.
+
+    📌 ¿Para qué sirve?
+
+    ✔ KPIs
+    ✔ dashboards
+    ✔ Power BI
+    ✔ reportes ejecutivos
+    ✔ análisis ventas
+    ✔ inventarios
+
+    📌 Ejemplo empresarial:
+
+    ventas totales por ciudad
+    costos por proyecto
+    facturación por cliente            
 
     📌 sum()
     Suma valores.
