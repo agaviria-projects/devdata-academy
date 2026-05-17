@@ -355,11 +355,21 @@ with tab4:
     Solución:
     pip install openpyxl
         """)
+    st.markdown("### 💼 Caso empresarial")
 
-        st.markdown("### 💼 Caso empresarial")
-
-        st.success("""
+    st.success("""
     Ejemplo real:
+
+    ✔ ventas SAP
+    ✔ inventarios
+    ✔ reportes financieros
+    ✔ entregas logísticas
+    ✔ movimientos de almacén
+    """)
+
+    # =========================================
+    # PRÁCTICA REAL
+    # =========================================
     st.markdown("### 📤 Probar con archivo real")
 
     archivo = st.file_uploader(
@@ -376,14 +386,9 @@ with tab4:
         st.success("✅ Archivo cargado correctamente")
 
         st.dataframe(df.head())
-    ✔ ventas SAP
-    ✔ inventarios
-    ✔ reportes financieros
-    ✔ entregas logísticas
-    ✔ movimientos de almacén
-        """)
+
     elif paso == "2️⃣ Inspeccionar DataFrame":
-        
+
         st.markdown("## 🔍 Paso 2 — Inspeccionar DataFrame")
 
         st.warning("""
@@ -446,4 +451,4 @@ with tab4:
     ✔ revisar fechas incorrectas
     ✔ validar cantidades
     ✔ encontrar errores de carga
-        """)     
+        """)
