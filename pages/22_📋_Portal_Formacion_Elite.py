@@ -1718,8 +1718,17 @@ El motor de datos es PostgreSQL.
 Yo desarrollo en VS Code y pruebo primero en localhost.
 
 ---
+# 50. Código para el sistema-capaictaciones.main.app.py
+Settings-Secrets contraseñas de la base de datos en supabase -bd postgreSQL formador2026
+y Elite2026 con el que ingresa el usuario a la app
+            
+DATABASE_URL = "postgresql+psycopg2://postgres.oefqprhzbhajncellasi:formador2026@aws-1-us-west-
+1.pooler.supabase.com:6543/postgres"
 
-# 50. Conclusión
+ADMIN_PASSWORD = "Elite2026"
+
+---            
+# 51. Conclusión
 
 Este proyecto no es solo una app en Streamlit.
 
