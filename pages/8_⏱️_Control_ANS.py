@@ -140,7 +140,7 @@ st.divider()
 st.markdown("## 5️⃣ Mover a Papelera API")
 
 st.markdown("""
-Como parte de ese proceso de descargar de evidencias se implemento este módulo y se utiliza osea las evidencias PDF son descargadas y procesadas desde Google Drive como parte del flujo operativo.
+Como parte de ese proceso de descarga de evidencias se implemento este módulo ,las evidencias PDF son descargadas y procesadas desde Google Drive como parte del flujo operativo.
 
 Debido a la gran cantidad de archivos generados diariamente, el almacenamiento en Google Drive comenzaba a llenarse rápidamente, afectando el espacio disponible para nuevas evidencias.
 
