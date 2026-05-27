@@ -65,34 +65,10 @@ Finalmente, se generan reportes que permiten validar si los materiales están co
 """)
 
 st.divider()
-
 # ============================================================
-# 3️⃣ DESCARGAR EVIDENCIAS DRIVE
+# 3️⃣ FORMULARIO TÉCNICO - REPORTE DE EVIDENCIAS
 # ============================================================
-
-st.markdown("## 3️⃣ Descargar Evidencias Drive")
-
-st.markdown("""
-Inicialmente este módulo se utilizaba para descargar evidencias PDF provenientes de Google Drive.
-
-Posteriormente el proceso fue optimizado y reemplazado por un compresor automático de PDF.
-
-Actualmente el sistema toma los archivos PDF originales y realiza automáticamente un proceso de compresión para reducir su peso sin afectar significativamente la visualización de las evidencias.
-
-El objetivo principal es:
-
-- Reducir tamaño de archivos PDF
-- Facilitar cargue de evidencias
-            
-""")
-
-st.divider()
-
-# ============================================================
-# 4️⃣ FORMULARIO TÉCNICO - REPORTE DE EVIDENCIAS
-# ============================================================
-
-st.markdown("## 4️⃣ Formulario Técnico - Reporte de Evidencias")
+st.markdown("## 3️⃣ Formulario Técnico - Reporte de Evidencias")
 
 st.markdown("""
 Se desarrolló un formulario en Google Forms para que los técnicos en campo puedan registrar y cargar las evidencias de las actividades ejecutadas durante la operación.
@@ -115,17 +91,39 @@ Toda la información cargada queda almacenada automáticamente para su posterior
 st.divider()
 
 # ============================================================
+# 4️⃣ DESCARGAR EVIDENCIAS DRIVE
+# ============================================================
+
+st.markdown("## 4️⃣ Descargar Evidencias Drive")
+
+st.markdown("""
+Inicialmente este módulo se utilizaba para descargar evidencias PDF provenientes de Google Drive.
+
+Posteriormente el proceso fue optimizado y reemplazado por un compresor automático de PDF.
+
+Actualmente el sistema toma los archivos PDF originales y realiza automáticamente un proceso de compresión para reducir su peso sin afectar significativamente la visualización de las evidencias.
+
+El objetivo principal es:
+
+- Reducir tamaño de archivos PDF
+- Facilitar cargue de evidencias
+            
+""")
+
+st.divider()
+
+# ============================================================
 # 5️⃣ MOVER A PAPELERA API
 # ============================================================
 
 st.markdown("## 5️⃣ Mover a Papelera API")
 
 st.markdown("""
-Inicialmente las evidencias PDF eran descargadas y almacenadas directamente desde Google Drive como parte del proceso operativo.
+Este módulo se utiliza luego de que las evidencias PDF son descargadas y procesadas desde Google Drive como parte del flujo operativo.
 
-Debido a la cantidad de archivos generados diariamente, el almacenamiento en Drive comenzaba a llenarse rápidamente, afectando el espacio disponible y el manejo de evidencias.
+Debido a la gran cantidad de archivos generados diariamente, el almacenamiento en Google Drive comenzaba a llenarse rápidamente, afectando el espacio disponible para nuevas evidencias.
 
-Por esta razón se desarrolló este módulo, cuya función es mover automáticamente a la papelera los PDF que ya fueron procesados previamente por el sistema.
+Por esta razón se desarrolló este proceso automatizado, cuya función es mover automáticamente a la papelera los PDF que ya fueron procesados previamente por el sistema.
 
 El objetivo principal es:
 
@@ -134,10 +132,11 @@ El objetivo principal es:
 - Evitar acumulación innecesaria de PDF
 - Optimizar el manejo de evidencias operativas
 
-Este proceso ayuda a mantener disponible el almacenamiento limitado de Google Drive y mejorar la administración de archivos dentro de la operación.
+Este proceso ayuda a mantener disponible el almacenamiento limitado de Google Drive y mejorar la administración documental dentro de la operación.
 """)
 
 st.divider()
+
 
 # ============================================================
 # 6️⃣ VISOR GEOGRÁFICO ANS
