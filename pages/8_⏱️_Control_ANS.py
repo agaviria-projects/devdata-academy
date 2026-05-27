@@ -97,17 +97,38 @@ st.divider()
 st.markdown("## 4️⃣ Descargar Evidencias Drive")
 
 st.markdown("""
-Inicialmente este módulo se utilizaba para descargar evidencias PDF provenientes de Google Drive.
+Inicialmente este módulo se utilizaba para descargar las evidencias PDF provenientes de Google Drive como parte del proceso operativo.
 
-Posteriormente el proceso fue optimizado y reemplazado por un compresor automático de PDF.
+Sin embargo, muchos archivos PDF superaban el tamaño permitido para cargue en el sistema Enter, dificultando el manejo y cargue de evidencias dentro de la operación.
 
-Actualmente el sistema toma los archivos PDF originales y realiza automáticamente un proceso de compresión para reducir su peso sin afectar significativamente la visualización de las evidencias.
+⚠️ Ejemplo de tamaño de archivos PDF:
 
-El objetivo principal es:
+Cuando Windows muestra un archivo con tamaño:
 
-- Reducir tamaño de archivos PDF
-- Facilitar cargue de evidencias
-            
+- 21.579 KB
+
+Realmente esto equivale aproximadamente a:
+
+- 21 MB
+
+Esto sucede porque Windows realiza la conversión utilizando la relación:
+
+- 1 MB = 1024 KB
+
+Por ejemplo:
+
+21.579 ÷ 1024 ≈ 21.07 MB
+
+Debido a esto, muchos archivos PDF superaban el límite permitido por el sistema Enter, haciendo necesario implementar un proceso automático de compresión de evidencias.
+
+Por esta razón el proceso fue optimizado mediante un compresor automático de PDF, desarrollado para reducir el peso de las evidencias sin afectar significativamente su visualización.
+
+Actualmente el sistema toma los PDF originales y realiza automáticamente un proceso de compresión para facilitar:
+
+- Reducción de tamaño de archivos PDF
+- Cargue de evidencias al sistema Enter
+- Optimización de almacenamiento
+- Mejor manejo documental operativo
 """)
 
 st.divider()
