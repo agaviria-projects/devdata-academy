@@ -12,11 +12,13 @@ st.subheader("Sistema de control técnico, tiempos y validación operativa")
 st.markdown("## 📘 ¿Qué es Control ANS?")
 
 st.markdown("""
-Control ANS es una plataforma desarrollada para automatizar y centralizar el seguimiento operativo de pedidos y actividades.
+Control ANS es una plataforma desarrollada para automatizar y centralizar el seguimiento operativo de los pedidos.
 
 El sistema permite organizar información proveniente de diferentes zonas operativas, validar registros, calcular tiempos ANS y generar indicadores para facilitar el control y análisis de la operación.
 
 Toda la información procesada es presentada en reportes y tableros que ayudan al usuario a realizar seguimiento operativo.
+
+Esta dividido en varios módulos:                         
 """)
 
 # ============================================================
@@ -55,7 +57,7 @@ st.markdown("""
 MO significa Mano de Obra vs Materiales.
 
             
-Este módulo igual incia desde un exporte del archivos en Fenxi, valida automáticamente que los materiales registrados correspondan correctamente a la mano de obra ejecutada en cada pedido.
+Este módulo igual incia desde un exporte del archivos en Fenix, valida automáticamente que los materiales registrados correspondan correctamente a la mano de obra ejecutada en cada pedido.
 
 El sistema realiza cruces entre pedidos, materiales y actividades para identificar posibles inconsistencias.
 
@@ -63,6 +65,7 @@ Finalmente, se generan reportes que permiten validar si los materiales están co
 """)
 
 st.divider()
+
 # ============================================================
 # 3️⃣ DESCARGAR EVIDENCIAS DRIVE
 # ============================================================
@@ -70,18 +73,17 @@ st.divider()
 st.markdown("## 3️⃣ Descargar Evidencias Drive")
 
 st.markdown("""
-Este módulo fue reemplazado por un proceso automatizado mediante el script `PDF_ZIP`.
+Inicialmente este módulo se utilizaba para descargar evidencias PDF provenientes de Google Drive.
 
-Su función principal es organizar y comprimir automáticamente las evidencias PDF generadas durante la operación.
+Posteriormente el proceso fue optimizado y reemplazado por un compresor automático de PDF.
 
-El sistema toma los archivos PDF, los agrupa y genera carpetas comprimidas (.zip) para facilitar:
+Actualmente el sistema toma los archivos PDF originales y realiza automáticamente un proceso de compresión para reducir su peso sin afectar significativamente la visualización de las evidencias.
 
-- Organización de evidencias
-- Reducción de espacio
-- Envío de información
-- cargue de pdf's al sistema Enter
+El objetivo principal es:
 
-Todo el proceso se realiza automáticamente para optimizar el manejo de evidencias operativas.
+- Reducir tamaño de archivos PDF
+- Facilitar cargue de evidencias
+            
 """)
 
 st.divider()
@@ -119,20 +121,22 @@ st.divider()
 st.markdown("## 5️⃣ Mover a Papelera API")
 
 st.markdown("""
-Este módulo permite liberar espacio automáticamente en Google Drive después de procesar las evidencias operativas.
+Inicialmente las evidencias PDF eran descargadas y almacenadas directamente desde Google Drive como parte del proceso operativo.
 
-Su función principal es mover a la papelera los archivos que ya fueron procesados previamente mediante el sistema `PDF_ZIP`, evitando acumulación innecesaria de información.
+Debido a la cantidad de archivos generados diariamente, el almacenamiento en Drive comenzaba a llenarse rápidamente, afectando el espacio disponible y el manejo de evidencias.
 
-El objetivo es optimizar el almacenamiento disponible en Google Drive, teniendo en cuenta el límite de espacio de 15 GB.
+Por esta razón se desarrolló este módulo, cuya función es mover automáticamente a la papelera los PDF que ya fueron procesados previamente por el sistema.
 
-Beneficios principales:
+El objetivo principal es:
 
-- Liberación automática de espacio
-- Mejor organización documental
-- Evita acumulación de archivos
-- Reduce reprocesos
-- Mantiene el Drive más limpio y controlado
+- Liberar espacio en Google Drive
+- Mantener control del almacenamiento
+- Evitar acumulación innecesaria de PDF
+- Optimizar el manejo de evidencias operativas
+
+Este proceso ayuda a mantener disponible el almacenamiento limitado de Google Drive y mejorar la administración de archivos dentro de la operación.
 """)
+
 st.divider()
 
 # ============================================================
