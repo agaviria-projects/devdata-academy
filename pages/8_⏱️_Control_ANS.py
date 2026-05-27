@@ -6,118 +6,209 @@ st.title("⏱️ Control ANS")
 st.subheader("Sistema de control técnico, tiempos y validación operativa")
 
 # ============================================================
-# 📘 DESCRIPCIÓN
+# 📘 DESCRIPCIÓN GENERAL
 # ============================================================
 
 st.markdown("## 📘 ¿Qué es Control ANS?")
 
 st.markdown("""
-Control ANS es un sistema que permite:
+Control ANS es una plataforma desarrollada para automatizar y centralizar el seguimiento operativo de pedidos y actividades.
 
-- Validar cumplimiento de tiempos (ANS)
-- Cruzar información entre FÉNIX y Excel
-- Detectar inconsistencias
-- Generar reportes operativos
-- Preparar datos para Power BI
+El sistema permite organizar información proveniente de diferentes zonas operativas, validar registros, calcular tiempos ANS y generar indicadores para facilitar el control y análisis de la operación.
 
-Tecnologías usadas:
+Toda la información procesada es presentada en reportes y tableros que ayudan al usuario a realizar seguimiento operativo.
+""")
 
-- Python (procesamiento)
-- Excel (salidas)
-- Flask (formulario técnico)
-- Power BI (visualización)
+# ============================================================
+# 1️⃣ GENERAR INFORME ANS
+# ============================================================
+
+st.markdown("## 1️⃣ Generar Informe ANS")
+
+st.markdown("""
+Este módulo se encarga de procesar los archivos operativos provenientes de las diferentes zonas y generar el informe principal de seguimiento ANS.
+
+Durante el proceso el sistema:
+
+- Consolida información
+- Limpia registros
+- Valida fechas y estados
+- Calcula tiempos ANS
+
+Posteriormente cada pedido es clasificado automáticamente en estados como:
+
+- 🟢 A Tiempo
+- 🟠 Alerta a 0 días
+- 🔴 Vencido
+
+Finalmente se generan reportes e indicadores que permiten realizar seguimiento operativo y análisis general de la información.
+""")
+
+st.divider()
+# ============================================================
+# 2️⃣ VALIDACIÓN MO VS MATERIALES
+# ============================================================
+
+st.markdown("## 2️⃣ Validación MO vs Materiales")
+
+st.markdown("""
+MO significa Mano de Obra vs Materiales.
+
+            
+Este módulo igual incia desde un exporte del archivos en Fenxi, valida automáticamente que los materiales registrados correspondan correctamente a la mano de obra ejecutada en cada pedido.
+
+El sistema realiza cruces entre pedidos, materiales y actividades para identificar posibles inconsistencias.
+
+Finalmente, se generan reportes que permiten validar si los materiales están correctos, si sobran registros o si existe información inconsistente.
+""")
+
+st.divider()
+# ============================================================
+# 3️⃣ DESCARGAR EVIDENCIAS DRIVE
+# ============================================================
+
+st.markdown("## 3️⃣ Descargar Evidencias Drive")
+
+st.markdown("""
+Este módulo fue reemplazado por un proceso automatizado mediante el script `PDF_ZIP`.
+
+Su función principal es organizar y comprimir automáticamente las evidencias PDF generadas durante la operación.
+
+El sistema toma los archivos PDF, los agrupa y genera carpetas comprimidas (.zip) para facilitar:
+
+- Organización de evidencias
+- Reducción de espacio
+- Envío de información
+- cargue de pdf's al sistema Enter
+
+Todo el proceso se realiza automáticamente para optimizar el manejo de evidencias operativas.
 """)
 
 st.divider()
 
 # ============================================================
-# 🧩 ESTRUCTURA DEL PROYECTO
+# 4️⃣ FORMULARIO TÉCNICO - REPORTE DE EVIDENCIAS
 # ============================================================
 
-st.markdown("## 🧩 Estructura del sistema")
+st.markdown("## 4️⃣ Formulario Técnico - Reporte de Evidencias")
 
-st.code("""
-Control_ANS/
-├── data_raw/            # Archivos originales (TXT, XLSX)
-├── data_clean/          # Archivos procesados
-├── dashboard/           # Archivos para Power BI
-├── formularios_tecnicos/ # Web Flask
-├── scripts/             # Lógica principal
-├── requirements.txt
-├── README.md
+st.markdown("""
+Se desarrolló un formulario en Google Forms para que los técnicos en campo puedan registrar y cargar las evidencias de las actividades ejecutadas durante la operación.
+
+El formulario permite registrar información como:
+
+- Nombre del técnico
+- Número del pedido
+- Actividad
+- Estado del Pdido
+- Municipio
+- Rural/Urbano
+- Observacion
+- Evidencias en PDF
+
+El objetivo principal es centralizar las evidencias operativas, facilitar el seguimiento de actividades.
+
+Toda la información cargada queda almacenada automáticamente para su posterior validación y control operativo.
 """)
-
 st.divider()
 
 # ============================================================
-# 🔥 SCRIPTS PRINCIPALES
+# 5️⃣ MOVER A PAPELERA API
 # ============================================================
 
-st.markdown("## 🔥 Scripts clave (lo más importante)")
-
-st.markdown("### 1. calculos_ans.py")
+st.markdown("## 5️⃣ Mover a Papelera API")
 
 st.markdown("""
-Procesa datos y calcula ANS:
+Este módulo permite liberar espacio automáticamente en Google Drive después de procesar las evidencias operativas.
 
-- FECHA_LIMITE_ANS
-- DIAS_TRANSCURRIDOS
-- DIAS_RESTANTES
-- ESTADO (VENCIDO / ALERTA / A TIEMPO)
+Su función principal es mover a la papelera los archivos que ya fueron procesados previamente mediante el sistema `PDF_ZIP`, evitando acumulación innecesaria de información.
 
-Incluye:
+El objetivo es optimizar el almacenamiento disponible en Google Drive, teniendo en cuenta el límite de espacio de 15 GB.
 
-- Exclusión de sábados, domingos y festivos
-- Formato condicional en Excel
-- Preparación para Power BI
+Beneficios principales:
+
+- Liberación automática de espacio
+- Mejor organización documental
+- Evita acumulación de archivos
+- Reduce reprocesos
+- Mantiene el Drive más limpio y controlado
 """)
-
-st.markdown("### 2. validar_export_almacen.py")
-
-st.markdown("""
-Cruza datos entre:
-
-- FÉNIX
-- Planilla Excel (Elite)
-
-Hace:
-
-- Limpieza de datos
-- Estandarización columnas
-- Merge (outer join)
-- Cálculo diferencias
-
-Genera:
-
-- CONTROL_ALMACEN.xlsx
-- RESUMEN
-- NO_COINCIDEN
-""")
-
-st.markdown("### 3. limpieza_fenix.py")
-
-st.markdown("""
-Limpia datos de FÉNIX:
-
-- Elimina duplicados
-- Corrige tipos de datos
-- Normaliza columnas
-- Prepara base para cálculos ANS
-""")
-
-st.markdown("### 4. diagnostico_control.py")
-
-st.markdown("""
-Detecta problemas:
-
-- Columnas vacías
-- Datos mal tipados
-- Inconsistencias
-- Errores en archivos
-""")
-
 st.divider()
 
+# ============================================================
+# 6️⃣ VISOR GEOGRÁFICO ANS
+# ============================================================
+
+st.markdown("## 6️⃣ Visor Geográfico ANS")
+
+st.markdown("""
+Este módulo permite visualizar geográficamente los pedidos y actividades operativas registradas en el sistema.
+
+La información es presentada sobre un mapa interactivo donde cada punto representa un pedido operativo clasificado según su estado ANS.
+
+El usuario puede realizar búsquedas, aplicar filtros y visualizar zonas con mayor cantidad de novedades o pedidos pendientes.
+
+Estados visualizados:
+
+- 🟢 A Tiempo
+- 🟡 Alerta
+- 🟠 Alerta a 0 días
+- 🔴 Vencido
+
+El objetivo principal es facilitar el seguimiento operativo y tener una visión más clara de la distribución de pedidos en campo.
+
+Posteriormente, toda esta información es consolidada y presentada en dashboards e indicadores finales para análisis y seguimiento por parte del usuario.
+""")
+
+# ============================================================
+# 📊 DASHBOARDS Y HERRAMIENTAS OPERATIVAS
+# ============================================================
+
+st.markdown("## 📊 Dashboards y herramientas operativas")
+
+# ------------------------------------------------------------
+# 1️⃣ DASHBOARD ANS OPERATIVO
+# ------------------------------------------------------------
+
+st.markdown("### 1️⃣ Dashboard ANS")
+
+st.markdown("""
+Este dashboard es el reporte principal compartido con el usuario final.
+
+Aquí se consolida toda la información procesada por el sistema Control ANS, permitiendo visualizar indicadores, estados operativos, cantidad de pedidos y seguimiento general de la operación.
+
+El objetivo es facilitar el análisis operativo y la toma de decisiones mediante información organizada y actualizada.
+""")
+
+# ------------------------------------------------------------
+# 2️⃣ DASHBOARD ANS INTERNO
+# ------------------------------------------------------------
+
+st.markdown("### 2️⃣ Dashboard ANS EPM")
+
+st.markdown("""
+Este dashboard es utilizado de manera interna como apoyo operativo para el seguimiento de pedidos.
+
+A diferencia del dashboard final entregado al cliente, este maneja un colchón operativo adicional que permite a los técnicos y coordinadores anticiparse a posibles vencimientos.
+
+El objetivo es evitar esperar hasta el último día contractual para ejecutar o atender actividades operativas.
+
+Actualmente este módulo se utiliza únicamente como apoyo interno de seguimiento.
+""")
+
+# ------------------------------------------------------------
+# 3️⃣ ENRUTAMIENTO OPERATIVO
+# ------------------------------------------------------------
+
+st.markdown("### 3️⃣ Enrutamiento Operativo")
+
+st.markdown("""
+Este módulo está orientado al apoyo operativo y visualización de rutas o distribución de actividades en campo.
+
+Actualmente se encuentra en fase de ajustes, validaciones y pruebas internas para evaluar su posible implementación dentro de la operación.
+
+El objetivo es facilitar futuros procesos de organización y seguimiento operativo en campo según las necesidades de la operación.
+""")
 # ============================================================
 # ⚙️ FLUJO REAL DEL SISTEMA
 # ============================================================
