@@ -202,6 +202,10 @@ Este es el dashboard principal entregado al usuario final para el seguimiento op
 La información presentada es consolidada automáticamente desde el sistema Control ANS, permitiendo visualizar indicadores, cantidades de pedidos y estados operativos de manera organizada y fácil de analizar.
 
 El objetivo principal es facilitar el seguimiento operativo y la toma de decisiones mediante información clara y centralizada.
+
+Consultar la cantidad de marcadores Object.keys(window.markers).length     
+
+Este comando permitía validar que la cantidad de puntos renderizados coincidiera con la cantidad de pedidos procesados por el sistema.                                           
 """)
 
 # ------------------------------------------------------------
