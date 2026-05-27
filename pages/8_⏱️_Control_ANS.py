@@ -26,7 +26,7 @@ Toda la información procesada es presentada en reportes y tableros que ayudan a
 st.markdown("## 1️⃣ Generar Informe ANS")
 
 st.markdown("""
-Este módulo se encarga de procesar los archivos operativos provenientes de las diferentes zonas y generar el informe principal de seguimiento ANS.
+Este módulo se encarga de procesar los archivos operativos provenientes de las diferentes zonas(extracciones desde Fenix) y generar el informe principal de seguimiento ANS.
 
 Durante el proceso el sistema:
 
@@ -209,6 +209,7 @@ Actualmente se encuentra en fase de ajustes, validaciones y pruebas internas par
 
 El objetivo es facilitar futuros procesos de organización y seguimiento operativo en campo según las necesidades de la operación.
 """)
+
 # ============================================================
 # ⚙️ FLUJO REAL DEL SISTEMA
 # ============================================================
