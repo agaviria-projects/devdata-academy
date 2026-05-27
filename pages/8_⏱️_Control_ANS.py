@@ -170,32 +170,27 @@ st.markdown("## 📊 Dashboards y herramientas operativas")
 # 1️⃣ DASHBOARD ANS OPERATIVO
 # ------------------------------------------------------------
 
-st.markdown("### 1️⃣ Dashboard ANS")
+st.markdown("### 1️⃣ Dashboard ANS Operativo")
 
 st.markdown("""
-Este dashboard es el reporte principal compartido con el usuario final.
+Este es el dashboard principal entregado al usuario final para el seguimiento operativo de los pedidos y estados ANS.
 
-Aquí se consolida toda la información procesada por el sistema Control ANS, permitiendo visualizar indicadores, estados operativos, cantidad de pedidos y seguimiento general de la operación.
+La información presentada es consolidada automáticamente desde el sistema Control ANS, permitiendo visualizar indicadores, cantidades de pedidos y estados operativos de manera organizada y fácil de analizar.
 
-El objetivo es facilitar el análisis operativo y la toma de decisiones mediante información organizada y actualizada.
+El objetivo principal es facilitar el seguimiento operativo y la toma de decisiones mediante información clara y centralizada.
 """)
 
 # ------------------------------------------------------------
-# 2️⃣ DASHBOARD ANS INTERNO
+# 2️⃣ DASHBOARD ANS CLIENTE
 # ------------------------------------------------------------
 
-st.markdown("### 2️⃣ Dashboard ANS EPM")
+st.markdown("### 2️⃣ Dashboard ANS Cliente")
 
 st.markdown("""
-Este dashboard es utilizado de manera interna como apoyo operativo para el seguimiento de pedidos.
+Este dashboard es utilizado de manera interna para visualizar los tiempos contractuales reales definidos por el cliente.
 
-A diferencia del dashboard final entregado al cliente, este maneja un colchón operativo adicional que permite a los técnicos y coordinadores anticiparse a posibles vencimientos.
-
-El objetivo es evitar esperar hasta el último día contractual para ejecutar o atender actividades operativas.
-
-Actualmente este módulo se utiliza únicamente como apoyo interno de seguimiento.
+El objetivo principal es tener una referencia exacta de los tiempos reales de cumplimiento y facilitar el control interno de la operación.
 """)
-
 # ------------------------------------------------------------
 # 3️⃣ ENRUTAMIENTO OPERATIVO
 # ------------------------------------------------------------
