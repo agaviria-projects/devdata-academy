@@ -100,7 +100,9 @@ st.markdown("""
 Inicialmente este módulo se utilizaba para descargar las evidencias PDF provenientes de Google Drive como parte del proceso operativo.
 
 Este modulo quedo en stanby para sus validaciones y ajustes de ser necesario para el uso operativo.
-                        
+
+Por esta razón el proceso fue optimizado mediante un compresor automático de PDF, desarrollado para reducir el peso de las evidencias sin afectar significativamente su visualización.
+                                               
 Sin embargo, muchos archivos PDF superaban el tamaño permitido para cargue en el sistema Enter, dificultando el manejo y cargue de evidencias dentro de la operación.
 
 ⚠️ Ejemplo de tamaño de archivos PDF:
@@ -122,9 +124,7 @@ Por ejemplo:
 21.579 ÷ 1024 ≈ 21.07 MB
 
 Debido a esto, muchos archivos PDF superaban el límite permitido por el sistema Enter, haciendo necesario implementar un proceso automático de compresión de evidencias.
-
-Por esta razón el proceso fue optimizado mediante un compresor automático de PDF, desarrollado para reducir el peso de las evidencias sin afectar significativamente su visualización.
-
+            
 Actualmente el sistema toma los PDF originales y realiza automáticamente un proceso de compresión para facilitar:
 
 - Reducción de tamaño de archivos PDF
