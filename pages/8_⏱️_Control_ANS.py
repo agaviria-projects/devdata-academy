@@ -99,6 +99,8 @@ st.markdown("## 4️⃣ Descargar Evidencias Drive")
 st.markdown("""
 Inicialmente este módulo se utilizaba para descargar las evidencias PDF provenientes de Google Drive como parte del proceso operativo.
 
+Este modulo quedo en stanby para sus validaciones y ajustes de ser necesario para el uso operativo.
+                        
 Sin embargo, muchos archivos PDF superaban el tamaño permitido para cargue en el sistema Enter, dificultando el manejo y cargue de evidencias dentro de la operación.
 
 ⚠️ Ejemplo de tamaño de archivos PDF:
